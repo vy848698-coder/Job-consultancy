@@ -19,7 +19,7 @@
   height: 72px;
   gap: 20px;
 }
-.nav-logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
+.nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; padding: 8px 0; }
 .logo-icon {
   width: 42px; height: 42px;
   background: var(--primary);
@@ -32,10 +32,29 @@
   box-shadow: 0 4px 14px rgba(15,23,42,.32);
 }
 .nav-logo-img {
-  height: 80px;
-  width: auto;
+  height: 56px;
+  width: 56px;
   object-fit: contain;
   flex-shrink: 0;
+}
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  justify-content: center;
+  gap: 2px;
+}
+.nav-logo-main {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.3px;
+}
+.nav-logo-sub {
+  font-size: 0.65rem;
+  color: var(--gray2);
+  font-weight: 500;
+  letter-spacing: -0.2px;
 }
 .logo-text { display: flex; flex-direction: column; line-height: 1.25; }
 .logo-main { font-size: 0.98rem; font-weight: 800; color: var(--primary); }

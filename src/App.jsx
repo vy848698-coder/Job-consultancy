@@ -386,7 +386,11 @@ function Navbar({ onNavigate, currentPage }) {
     <nav className={`navbar${scrolled ? ' scrolled' : ''}${menuOpen ? ' menu-open' : ''}`}>
       <div className="container nav-inner">
         <div className="nav-logo" style={{ cursor: 'pointer' }} onClick={() => { onNavigate('home'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-          <img src={owsLogo} alt="Odisha Workforce Solutions" className="nav-logo-img" />
+          <img src={owsBadge} alt="Odisha Workforce Solutions" className="nav-logo-img" />
+          <div className="nav-logo-text">
+            <span className="nav-logo-main">Odisha Workforce Solutions</span>
+            <span className="nav-logo-sub">ISO 9001:2015 Certified</span>
+          </div>
         </div>
         <ul className="nav-links">
           {NAV_LINKS.map((l) => (

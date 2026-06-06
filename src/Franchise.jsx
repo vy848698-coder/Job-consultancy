@@ -1,4 +1,8 @@
 import { motion } from 'framer-motion'
+import {
+  Wallet, ClipboardList, Globe, TrendingUp, Handshake, Zap,
+  Building2, Monitor, Users, Banknote, MapPin, ScrollText, Store,
+} from 'lucide-react'
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
 const fadeLeft = { hidden: { opacity: 0, x: -44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
@@ -8,12 +12,12 @@ const staggerItem = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0
 const VP = { once: true, margin: '-80px' }
 
 const BENEFITS = [
-  { emoji: '💰', title: 'Low Investment, High Returns', desc: 'Start with minimal capital and leverage our proven business model for consistent monthly revenue.', color: '#2563EB', bg: '#EFF6FF' },
-  { emoji: '📋', title: 'Complete Training & Support', desc: 'Full operational training, marketing materials, and dedicated support from our core team.', color: '#059669', bg: '#F0FDF4' },
-  { emoji: '🌐', title: 'Exclusive Territory Rights', desc: 'Operate with exclusive rights in your district with full brand protection and zero competition.', color: '#7C3AED', bg: '#F5F3FF' },
-  { emoji: '📈', title: 'Proven Business Model', desc: 'Join 15+ successful partners already earning consistent monthly revenue across India.', color: '#D97706', bg: '#FFFBEB' },
-  { emoji: '🤝', title: 'Strong Brand Support', desc: 'Leverage the OWS brand equity, national networks, and marketing collateral to build your business faster.', color: '#DC2626', bg: '#FEF2F2' },
-  { emoji: '⚡', title: 'Fast Setup & Launch', desc: 'Get operational within 2–3 weeks with our turnkey setup guide and dedicated onboarding team.', color: '#0891B2', bg: '#ECFEFF' },
+  { Icon: Wallet, title: 'Low Investment, High Returns', desc: 'Start with minimal capital and leverage our proven business model for consistent monthly revenue.', color: '#2563EB', bg: '#EFF6FF' },
+  { Icon: ClipboardList, title: 'Complete Training & Support', desc: 'Full operational training, marketing materials, and dedicated support from our core team.', color: '#059669', bg: '#F0FDF4' },
+  { Icon: Globe, title: 'Exclusive Territory Rights', desc: 'Operate with exclusive rights in your district with full brand protection and zero competition.', color: '#7C3AED', bg: '#F5F3FF' },
+  { Icon: TrendingUp, title: 'Proven Business Model', desc: 'Join 15+ successful partners already earning consistent monthly revenue across India.', color: '#D97706', bg: '#FFFBEB' },
+  { Icon: Handshake, title: 'Strong Brand Support', desc: 'Leverage the OWS brand equity, national networks, and marketing collateral to build your business faster.', color: '#DC2626', bg: '#FEF2F2' },
+  { Icon: Zap, title: 'Fast Setup & Launch', desc: 'Get operational within 2–3 weeks with our turnkey setup guide and dedicated onboarding team.', color: '#0891B2', bg: '#ECFEFF' },
 ]
 
 const STEPS = [
@@ -25,12 +29,12 @@ const STEPS = [
 ]
 
 const REQUIREMENTS = [
-  { emoji: '🏢', label: 'Office Space', value: '200–300 sq ft (owned or rented)' },
-  { emoji: '💻', label: 'Equipment', value: '2+ computers, printer, internet connection' },
-  { emoji: '👥', label: 'Team Size', value: '2–4 staff members to start' },
-  { emoji: '💵', label: 'Investment', value: 'Contact us for franchise fee details' },
-  { emoji: '📍', label: 'Location', value: 'Any district/city in India' },
-  { emoji: '📜', label: 'Experience', value: 'HR or business background preferred (not mandatory)' },
+  { Icon: Building2, label: 'Office Space', value: '200–300 sq ft (owned or rented)' },
+  { Icon: Monitor, label: 'Equipment', value: '2+ computers, printer, internet connection' },
+  { Icon: Users, label: 'Team Size', value: '2–4 staff members to start' },
+  { Icon: Banknote, label: 'Investment', value: 'Contact us for franchise fee details' },
+  { Icon: MapPin, label: 'Location', value: 'Any district/city in India' },
+  { Icon: ScrollText, label: 'Experience', value: 'HR or business background preferred (not mandatory)' },
 ]
 
 const EARNERS = [
@@ -48,8 +52,9 @@ export default function Franchise({ onNavigate }) {
         <div className="page-hero-orb page-hero-orb-1" />
         <div className="page-hero-orb page-hero-orb-2" />
         <div className="container">
-          <motion.div className="page-hero-inner" initial="hidden" animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          <div className="page-hero-inner with-visual">
+            <motion.div className="page-hero-content" initial="hidden" animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
             <motion.div className="page-breadcrumb" variants={fadeUp}>
               <button className="page-breadcrumb-link" onClick={() => onNavigate('home')}>Home</button>
               <span className="page-breadcrumb-sep">›</span>
@@ -78,7 +83,35 @@ export default function Franchise({ onNavigate }) {
                 Call for Details
               </motion.a>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="page-hero-visual" initial="hidden" animate="visible" variants={fadeRight}>
+              <motion.div className="svc-hero-panel"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+                <div className="svc-hero-panel-head">
+                  <span className="svc-hero-panel-badge"><Store size={18} strokeWidth={2} /></span>
+                  <div>
+                    <div className="svc-hero-panel-title">Why Partner With Us</div>
+                    <div className="svc-hero-panel-sub">Low investment · High returns</div>
+                  </div>
+                </div>
+                {[
+                  { Icon: Wallet, label: 'Low Investment, High Returns', color: '#2563EB' },
+                  { Icon: ClipboardList, label: 'Complete Training & Support', color: '#059669' },
+                  { Icon: Globe, label: 'Exclusive Territory Rights', color: '#7C3AED' },
+                  { Icon: Zap, label: 'Fast Setup & Launch', color: '#0891B2' },
+                ].map((a) => (
+                  <div key={a.label} className="svc-hero-row">
+                    <span className="svc-hero-row-icon" style={{ background: `${a.color}18`, color: a.color }}>
+                      <a.Icon size={17} strokeWidth={1.9} />
+                    </span>
+                    <span className="svc-hero-row-label">{a.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -107,7 +140,7 @@ export default function Franchise({ onNavigate }) {
           <motion.div className="franchise-benefits-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {BENEFITS.map((b) => (
               <motion.div key={b.title} className="franchise-benefit-card" variants={staggerItem} whileHover={{ y: -6 }}>
-                <div className="fbc-icon" style={{ background: b.bg, color: b.color }}>{b.emoji}</div>
+                <div className="fbc-icon" style={{ background: b.bg, color: b.color }}><b.Icon size={24} strokeWidth={1.9} /></div>
                 <h4 className="fbc-title">{b.title}</h4>
                 <p className="fbc-desc">{b.desc}</p>
               </motion.div>
@@ -139,7 +172,7 @@ export default function Franchise({ onNavigate }) {
                     <div className="fe-av" style={{ background: e.color }}>{e.initials}</div>
                     <div className="fe-info">
                       <div className="fe-name">{e.name}</div>
-                      <div className="fe-location">📍 {e.location}</div>
+                      <div className="fe-location"><MapPin size={13} strokeWidth={2} style={{ verticalAlign: '-2px', marginRight: 3 }} />{e.location}</div>
                     </div>
                     <div className="fe-revenue" style={{ color: e.color }}>{e.revenue}</div>
                   </div>
@@ -181,7 +214,7 @@ export default function Franchise({ onNavigate }) {
           <motion.div className="franchise-req-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {REQUIREMENTS.map((r) => (
               <motion.div key={r.label} className="franchise-req-card" variants={staggerItem}>
-                <span className="frc-emoji">{r.emoji}</span>
+                <span className="frc-emoji"><r.Icon size={22} strokeWidth={1.9} color="var(--primary)" /></span>
                 <div>
                   <div className="frc-label">{r.label}</div>
                   <div className="frc-value">{r.value}</div>

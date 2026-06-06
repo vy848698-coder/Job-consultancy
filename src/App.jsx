@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useInView as useFramerInView } from 'framer-motion'
+import {
+  Users, GraduationCap, TrendingUp, Briefcase, UserRound, Building2, School, Landmark,
+  HeartHandshake, Target, Globe, ShieldCheck, Award, BadgeCheck, Rocket, MapPin, Phone, Mail,
+} from 'lucide-react'
 import owsLogo from './assets/t.png'
 import owsBadge from './assets/logo-badge.png'
 import AboutUs from './AboutUs'
@@ -191,8 +195,7 @@ function applyFont(font) {
 const NAV_LINKS = ['Home', 'About Us', 'Our Services', 'Industries', 'Gallery', 'Contact Us', 'Franchise']
 
 const TRUSTED_COMPANIES = [
-  'Infosys', 'Wipro', 'TCS', 'HCL Technologies', 'Tech Mahindra',
-  'HDFC Bank', 'Apollo Hospitals', 'L&T Construction', 'Reliance Industries', 'ICICI Bank',
+  'Job Seekers', 'Students', 'Employers', 'Educational Institutions', 'Corporate Organizations',
 ]
 
 const OVERVIEW_METRICS = [
@@ -226,12 +229,12 @@ const JOB_CATEGORIES = [
 ]
 
 const FEATURED_JOBS = [
-  { title: 'Senior React Developer', company: 'MNO Technologies', location: 'Bhubaneswar', salary: '₹8–12 LPA', type: 'Full Time', hot: true, initials: 'MT', color: '#2563EB' },
-  { title: 'HR Manager', company: 'Sunrise Manufacturing', location: 'Cuttack', salary: '₹5–8 LPA', type: 'Full Time', hot: false, initials: 'SM', color: '#059669' },
-  { title: 'Branch Manager – BFSI', company: 'Orion Finance', location: 'Rourkela', salary: '₹6–9 LPA', type: 'Full Time', hot: true, initials: 'OF', color: '#D97706' },
-  { title: 'ICU Registered Nurse', company: 'MedLife Hospitals', location: 'Bhubaneswar', salary: '₹3.5–5 LPA', type: 'Full Time', hot: false, initials: 'ML', color: '#DC2626' },
-  { title: 'QA / Software Tester', company: 'DataSoft India', location: 'Remote / BBSR', salary: '₹4–7 LPA', type: 'Hybrid', hot: false, initials: 'DS', color: '#7C3AED' },
-  { title: 'Sales Executive', company: 'RetailMax Odisha', location: 'Bhubaneswar', salary: '₹2.5–4 LPA', type: 'Full Time', hot: true, initials: 'RM', color: '#BE185D' },
+  { title: 'Software Developer', sector: 'IT & Software', location: 'Odisha & India', type: 'Full Time', initials: 'IT', color: '#2563EB' },
+  { title: 'HR Manager', sector: 'HR & Admin', location: 'Odisha', type: 'Full Time', initials: 'HR', color: '#059669' },
+  { title: 'Branch Manager', sector: 'Banking & BFSI', location: 'Odisha', type: 'Full Time', initials: 'BF', color: '#D97706' },
+  { title: 'Registered Nurse', sector: 'Healthcare', location: 'Odisha & India', type: 'Full Time', initials: 'HC', color: '#DC2626' },
+  { title: 'QA / Software Tester', sector: 'IT & Software', location: 'Remote / India', type: 'Hybrid', initials: 'QA', color: '#7C3AED' },
+  { title: 'Sales Executive', sector: 'Retail & Sales', location: 'Odisha', type: 'Full Time', initials: 'SL', color: '#BE185D' },
 ]
 
 const SERVICES_SEEKERS = [
@@ -297,10 +300,10 @@ const PROCESS_STEPS = [
 ]
 
 const MOCK_CANDIDATES = [
-  { initials: 'AP', name: 'Arjun Patra', role: 'Senior React Developer', stage: 'Interview', score: 92, color: '#3B82F6' },
-  { initials: 'SN', name: 'Smita Nanda', role: 'Product Manager', stage: 'Assessment', score: 87, color: '#8B5CF6' },
-  { initials: 'RK', name: 'Rahul Kumar', role: 'DevOps Engineer', stage: 'Screening', score: 81, color: '#10B981' },
-  { initials: 'PM', name: 'Priya Mishra', role: 'UX Designer', stage: 'Interview', score: 95, color: '#F59E0B' },
+  { initials: 'IT', name: 'Software Developer', role: 'IT & Software', stage: 'Interview', score: 92, color: '#3B82F6' },
+  { initials: 'MG', name: 'Project Manager', role: 'Management', stage: 'Assessment', score: 87, color: '#8B5CF6' },
+  { initials: 'BF', name: 'Accountant', role: 'Finance & BFSI', stage: 'Screening', score: 81, color: '#10B981' },
+  { initials: 'HC', name: 'Staff Nurse', role: 'Healthcare', stage: 'Interview', score: 95, color: '#F59E0B' },
 ]
 
 const STUDY_DESTINATIONS = [
@@ -326,21 +329,26 @@ const FRANCHISE_FEATURES = [
   { icon: '📈', title: 'Proven Business Model', desc: 'Join 15+ successful partners already earning consistent monthly revenue across India.' },
 ]
 
-const TESTIMONIALS = [
+const APPROACH = [
   {
-    name: 'Rahul Panigrahi', role: 'Software Engineer', company: 'TCS, Bhubaneswar',
-    quote: 'OWS helped me land my first IT job within 3 weeks of registering. The mock interviews and resume support made all the difference.',
-    grad: 'linear-gradient(135deg,#2563EB,#0EA5E9)', color: '#2563EB',
+    Icon: HeartHandshake, title: 'People-Centric',
+    desc: 'Every solution is tailored around the individuals and organizations we serve, creating sustainable career pathways.',
+    color: '#2563EB',
   },
   {
-    name: 'Sneha Mohanty', role: 'HR Head', company: 'Manufacturing Firm',
-    quote: 'We needed 40 skilled workers on a tight deadline. Odisha Workforce Solutions delivered faster than expected — quality candidates, smooth process.',
-    grad: 'linear-gradient(135deg,#7C3AED,#EC4899)', color: '#7C3AED',
+    Icon: Target, title: 'Result-Oriented',
+    desc: 'We focus on measurable outcomes and long-term success — not just placements, but lasting impact.',
+    color: '#7C3AED',
   },
   {
-    name: 'Ankit Das', role: 'Graduate Student', company: 'Now studying in Canada',
-    quote: 'Their education consultancy team guided me through every step. Outstanding knowledge of visa procedures and university selection.',
-    grad: 'linear-gradient(135deg,#059669,#0891B2)', color: '#059669',
+    Icon: Globe, title: 'Local Expertise, Global Outlook',
+    desc: 'Strong roots in Odisha with a network and reach that extends across India and internationally.',
+    color: '#059669',
+  },
+  {
+    Icon: ShieldCheck, title: 'Transparent & Ethical',
+    desc: 'Compliance-driven, ISO 9001:2015 certified processes built on trust and integrity.',
+    color: '#D97706',
   },
 ]
 
@@ -388,7 +396,7 @@ function Navbar({ onNavigate, currentPage }) {
         <div className="nav-logo" style={{ cursor: 'pointer' }} onClick={() => { onNavigate('home'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
           <img src={owsBadge} alt="Odisha Workforce Solutions" className="nav-logo-img" />
           <div className="nav-logo-text">
-            <span className="nav-logo-main">Odisha Workforce Solutions</span>
+            <span className="nav-logo-main">Odisha Workforce</span>
             <span className="nav-logo-sub">ISO 9001:2015 Certified</span>
           </div>
         </div>
@@ -473,56 +481,70 @@ function Navbar({ onNavigate, currentPage }) {
 /* ══════════════════════════════════════════
    OVERVIEW CARD
 ══════════════════════════════════════════ */
-function OverviewCard() {
+function HeroAnimation() {
+  const services = [
+    { Icon: Users, label: 'Recruitment' },
+    { Icon: GraduationCap, label: 'Education' },
+    { Icon: TrendingUp, label: 'Skill Dev' },
+    { Icon: Briefcase, label: 'HR Services' },
+  ]
   return (
-    <div className="overview-card">
-      <div className="overview-sidebar">
-        {['🏠', '👥', '📋', '✅', '🔔'].map((ic, i) => (
-          <button key={i} className={`sidebar-btn${i === 0 ? ' active' : ''}`}>{ic}</button>
-        ))}
-      </div>
-      <div className="overview-body">
-        <div className="overview-header">
-          <div>
-            <h4>Recruitment Overview</h4>
-            <span className="overview-sub">Bhubaneswar · Live</span>
-          </div>
-          <div className="live-badge"><span className="live-dot" />Live</div>
-        </div>
-        <div className="metric-grid">
-          {OVERVIEW_METRICS.map((m) => (
-            <div key={m.label} className="metric-box">
-              <div className="metric-val" style={{ color: m.color }}>{m.value}</div>
-              <div className="metric-label">{m.label}</div>
-              <div className="metric-trend up">↑ {m.trend}</div>
-            </div>
-          ))}
-        </div>
-        <div className="pipeline-section">
-          <div className="pipeline-header"><span>Candidate Pipeline</span></div>
-          {PIPELINE.map((p) => (
-            <div key={p.label} className="pipeline-row">
-              <span className="pipeline-label">{p.label}</span>
-              <div className="pipeline-bar-wrap">
-                <div className="pipeline-bar-fill" style={{ width: `${p.pct}%`, background: p.color }} />
-              </div>
-              <span className="pipeline-val">{p.value.toLocaleString()}</span>
-            </div>
-          ))}
-        </div>
-        <div className="industries-section">
-          <div className="pipeline-header"><span>Top Industries</span></div>
-          {INDUSTRY_BARS.map((ind) => (
-            <div key={ind.name} className="ind-row">
-              <span className="ind-name">{ind.name}</span>
-              <div className="ind-bar-wrap">
-                <div className="ind-bar-fill" style={{ width: `${ind.pct}%`, background: ind.color }} />
-              </div>
-              <span className="ind-pct">{ind.pct}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="hero-anim" style={{ position: 'relative', width: '100%', maxWidth: '420px', aspectRatio: '1 / 1', margin: '0 auto' }}>
+      {/* pulsing glow */}
+      <motion.div
+        style={{ position: 'absolute', inset: '12%', borderRadius: '50%', background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)', filter: 'blur(24px)' }}
+        animate={{ scale: [1, 1.15, 1], opacity: [0.18, 0.32, 0.18] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      {/* concentric slowly-rotating rings */}
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          style={{ position: 'absolute', inset: `${6 + i * 13}%`, border: '1.5px dashed var(--primary)', borderRadius: '50%', opacity: 0.28 }}
+          animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
+          transition={{ duration: 55 - i * 12, repeat: Infinity, ease: 'linear' }}
+        />
+      ))}
+      {/* orbiting service chips */}
+      <motion.div
+        style={{ position: 'absolute', inset: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
+      >
+        {services.map((s, i) => {
+          const angle = (i / services.length) * 2 * Math.PI - Math.PI / 2
+          const x = 50 + 41 * Math.cos(angle)
+          const y = 50 + 41 * Math.sin(angle)
+          return (
+            <motion.div
+              key={s.label}
+              style={{
+                position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)',
+                display: 'flex', alignItems: 'center', gap: '7px', padding: '9px 14px', borderRadius: '999px',
+                background: 'var(--white)', boxShadow: '0 12px 28px -12px rgba(15,23,42,.3)', border: '1px solid var(--border)',
+                whiteSpace: 'nowrap', fontSize: '.82rem', fontWeight: 600, color: 'var(--dark)',
+              }}
+              animate={{ rotate: -360 }}
+              transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
+            >
+              <s.Icon size={17} strokeWidth={2} color="var(--primary)" />{s.label}
+            </motion.div>
+          )
+        })}
+      </motion.div>
+      {/* center badge */}
+      <motion.div
+        style={{
+          position: 'absolute', top: '50%', left: '50%', width: '42%', height: '42%',
+          transform: 'translate(-50%, -50%)', borderRadius: '50%', background: 'var(--white)',
+          boxShadow: '0 26px 60px -18px rgba(15,23,42,.38)', border: '1px solid var(--border)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '13%',
+        }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <img src={owsBadge} alt="Odisha Workforce Solutions" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+      </motion.div>
     </div>
   )
 }
@@ -573,7 +595,7 @@ function Hero({ onNavigate }) {
                   <div key={i} className="trust-av" style={{ background: c }}>{i}</div>
                 ))}
               </div>
-              <span>500+ professionals placed this year</span>
+              <span>Trusted by job seekers &amp; employers across India</span>
             </motion.div>
           </motion.div>
 
@@ -584,15 +606,15 @@ function Hero({ onNavigate }) {
             transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.div className="floating-card top-card" animate={{ y: [0, -9, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}>
-              <span className="fc-icon">✅</span>
+              <span className="fc-icon"><BadgeCheck size={20} strokeWidth={2} color="var(--primary)" /></span>
               <div>
-                <div className="fc-title">300+ Employer Partners</div>
+                <div className="fc-title">Trusted Employer Network</div>
                 <div className="fc-sub">Across Odisha &amp; India</div>
               </div>
             </motion.div>
-            <OverviewCard />
+            <HeroAnimation />
             <motion.div className="floating-card bottom-card" animate={{ y: [0, -9, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}>
-              <span className="fc-icon">🚀</span>
+              <span className="fc-icon"><Rocket size={20} strokeWidth={2} color="var(--primary)" /></span>
               <div>
                 <div className="fc-title">Pan India &amp; International</div>
                 <div className="fc-sub">Placement network</div>
@@ -616,7 +638,7 @@ function TrustedBy() {
     <div className="trusted-section">
       <div className="trusted-label-wrap">
         <span className="trusted-line" />
-        <p className="trusted-label">Trusted by 300+ leading companies across India</p>
+        <p className="trusted-label">A trusted partner for job seekers, students, employers &amp; institutions across India and beyond</p>
         <span className="trusted-line" />
       </div>
       <div className="trusted-marquee-wrap">
@@ -639,25 +661,111 @@ function TrustedBy() {
 /* ══════════════════════════════════════════
    STATS
 ══════════════════════════════════════════ */
-function Stats() {
+function AboutIntro() {
+  const pillars = [
+    { Icon: Users,         label: 'Recruitment & Staffing', color: '#2563EB' },
+    { Icon: GraduationCap, label: 'Education Consultancy',   color: '#059669' },
+    { Icon: TrendingUp,    label: 'Skill Development',       color: '#D97706' },
+    { Icon: Briefcase,     label: 'HR & Workforce Services', color: '#7C3AED' },
+  ]
   return (
     <section className="stats-section">
       <div className="container">
+        <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+          <div className="section-tag">Welcome to OWS</div>
+          <h2 className="section-title">Empowering People.<br />Enabling Progress.</h2>
+          <p className="section-subtitle">
+            At Odisha Workforce Solutions (OWS), we specialize in bridging the gap between talent and opportunity — empowering individuals and enabling organizations to thrive in today's dynamic and competitive world.
+          </p>
+          <p className="section-subtitle" style={{ marginTop: '14px' }}>
+            Headquartered in Bhubaneswar, we are an ISO 9001:2015 Certified, MSME-registered, and GST-compliant organization offering end-to-end solutions in:
+          </p>
+        </motion.div>
         <motion.div className="stats-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-          {[
-            { end: 5000, suffix: '+', label: 'Candidates Placed', sub: 'Across industries', emoji: '👤', color: '#2563EB' },
-            { end: 300,  suffix: '+', label: 'Employer Partners',  sub: 'Pan India network',  emoji: '🏢', color: '#059669' },
-            { end: 95,   suffix: '%', label: 'Client Retention',   sub: 'Year-over-year',     emoji: '⭐', color: '#D97706' },
-            { end: 14,   suffix: '',  label: 'Day Avg. Hire Time', sub: 'Industry fastest',   emoji: '⚡', color: '#7C3AED' },
-          ].map((s) => (
+          {pillars.map((s) => (
             <motion.div key={s.label} className="stat-card-premium" variants={staggerItem} whileHover={{ y: -6 }}>
-              <div className="stat-icon-wrap" style={{ background: `${s.color}18`, color: s.color }}>{s.emoji}</div>
-              <div className="stat-num-big" style={{ color: s.color }}><Counter end={s.end} suffix={s.suffix} /></div>
+              <div className="stat-icon-wrap" style={{ background: `${s.color}18`, color: s.color }}><s.Icon size={26} strokeWidth={1.9} /></div>
               <div className="stat-label-big">{s.label}</div>
-              <div className="stat-sub">{s.sub}</div>
             </motion.div>
           ))}
         </motion.div>
+        <motion.p className="lead-note" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+          We proudly serve clients, institutions, job seekers, and students across India and internationally.
+        </motion.p>
+      </div>
+    </section>
+  )
+}
+
+function WhoWeAre() {
+  const partners = [
+    { Icon: UserRound,     label: 'Job Seekers' },
+    { Icon: GraduationCap, label: 'Students' },
+    { Icon: Building2,     label: 'Employers' },
+    { Icon: School,        label: 'Educational Institutions' },
+    { Icon: Landmark,      label: 'Corporate Organizations' },
+  ]
+  return (
+    <section className="categories-section">
+      <div className="container">
+        <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+          <div className="section-tag">Who We Are</div>
+          <h2 className="section-title">A Trusted Partner<br />for Your Growth</h2>
+          <p className="section-subtitle">
+            Our mission is to create sustainable career pathways and support workforce growth through innovative and people-focused solutions. We work as a trusted partner for:
+          </p>
+        </motion.div>
+        <motion.div className="who-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
+          {partners.map((p) => (
+            <motion.div key={p.label} className="who-card" variants={staggerItem}>
+              <div className="who-icon"><p.Icon size={28} strokeWidth={1.8} /></div>
+              <div className="who-label">{p.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+        <motion.p className="lead-note" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+          Our approach is <strong>people-centric, result-oriented, and impact-driven</strong>, ensuring every solution is tailored to achieve long-term success and measurable results.
+        </motion.p>
+      </div>
+    </section>
+  )
+}
+
+function BasedInOdisha() {
+  const points = [
+    'Searching for the right career opportunity',
+    'Planning to study abroad',
+    'Hiring skilled professionals',
+    'Building a future-ready workforce',
+  ]
+  return (
+    <section className="why-section">
+      <div className="container">
+        <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+          <div className="section-tag">Based in Odisha</div>
+          <h2 className="section-title">Based in Odisha.<br />Serving India &amp; Beyond.</h2>
+          <p className="section-subtitle">Whether you are:</p>
+        </motion.div>
+        <motion.ul
+          className="why-list"
+          style={{ maxWidth: '560px', margin: '0 auto' }}
+          variants={stagger} initial="hidden" whileInView="visible" viewport={VP}
+        >
+          {points.map((item) => (
+            <motion.li key={item} className="why-item" variants={staggerItem}>
+              <div className="why-check">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span>{item}</span>
+            </motion.li>
+          ))}
+        </motion.ul>
+        <motion.p
+          style={{ textAlign: 'center', maxWidth: '640px', margin: '30px auto 0', color: 'var(--dark)', fontWeight: 600, fontSize: '1.08rem' }}
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}
+        >
+          Odisha Workforce Solutions (OWS) is your trusted partner every step of the way.
+        </motion.p>
       </div>
     </section>
   )
@@ -688,7 +796,7 @@ function Categories({ onNavigate }) {
               <div className="cat-icon">{cat.emoji}</div>
               <div className="cat-body">
                 <div className="cat-label">{cat.label}</div>
-                <div className="cat-count">{cat.count} open roles</div>
+                <div className="cat-count">View opportunities</div>
               </div>
               <span className="cat-arrow">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -762,28 +870,23 @@ function FeaturedJobs({ onNavigate }) {
       <div className="container">
         <motion.div className="jobs-header" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
           <div>
-            <div className="section-tag">Featured Jobs</div>
-            <h2 className="section-title">Latest Opportunities<br />Waiting for You</h2>
+            <div className="section-tag">Roles We Recruit For</div>
+            <h2 className="section-title">Opportunities Across<br />Every Sector</h2>
           </div>
-          <motion.button className="btn btn-outline" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('services')}>View All Jobs →</motion.button>
+          <motion.button className="btn btn-outline" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('contact')}>Get in Touch →</motion.button>
         </motion.div>
         <motion.div className="jobs-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
           {FEATURED_JOBS.map((job) => (
             <motion.div key={job.title} className="job-card" variants={staggerItem} whileHover={{ y: -5 }}>
               <div className="job-card-top">
                 <div className="job-logo" style={{ background: `${job.color}18`, color: job.color }}>{job.initials}</div>
-                {job.hot && <span className="job-hot">🔥 Hot</span>}
               </div>
               <h4 className="job-title">{job.title}</h4>
-              <p className="job-company">{job.company}</p>
+              <p className="job-company">{job.sector}</p>
               <div className="job-meta">
                 <span className="job-meta-item">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   {job.location}
-                </span>
-                <span className="job-meta-item">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-                  {job.salary}
                 </span>
               </div>
               <div className="job-footer">
@@ -915,16 +1018,6 @@ function StudyAbroad() {
             <motion.div key={d.country} className="study-card" variants={staggerItem} whileHover={{ y: -8, borderColor: d.color }}>
               <div className="study-flag">{d.flag}</div>
               <h3 className="study-country">{d.country}</h3>
-              <div className="study-stat-row">
-                <div className="study-stat">
-                  <span className="study-stat-n" style={{ color: d.color }}>{d.students}</span>
-                  <span className="study-stat-l">Students Guided</span>
-                </div>
-                <div className="study-stat">
-                  <span className="study-stat-n">{d.unis}</span>
-                  <span className="study-stat-l">Available</span>
-                </div>
-              </div>
               <div className="study-unis">
                 {d.top.map((u) => <span key={u} className="study-uni-tag">{u}</span>)}
               </div>
@@ -952,17 +1045,9 @@ function WhyChoose({ onNavigate }) {
           <motion.div className="why-left" variants={fadeLeft}>
             <div className="why-big-card">
               <div className="wbc-glow" />
-              <div className="wbc-icon">🏆</div>
-              <h3>Why 300+ Companies Trust Us</h3>
-              <p>From startups to large enterprises, we have delivered consistent, quality workforce solutions across Odisha and beyond.</p>
-              <div className="wbc-stats">
-                {[{ n: '5,000+', l: 'Placements' }, { n: '8+', l: 'Years Exp.' }, { n: '95%', l: 'Retention' }].map((s) => (
-                  <div key={s.l} className="wbc-stat">
-                    <span className="wbc-stat-n">{s.n}</span>
-                    <span className="wbc-stat-l">{s.l}</span>
-                  </div>
-                ))}
-              </div>
+              <div className="wbc-icon"><Award size={38} strokeWidth={1.7} /></div>
+              <h3>Why Businesses Trust Us</h3>
+              <p>From startups to large enterprises, we deliver consistent, quality workforce solutions across Odisha and beyond.</p>
               <div className="wbc-badges">
                 {['ISO 9001:2015', 'MSME Registered', 'GST Compliant'].map((b) => (
                   <span key={b} className="wbc-badge">{b}</span>
@@ -1003,28 +1088,16 @@ function Testimonials() {
     <section className="testi-section" id="testimonials">
       <div className="container">
         <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-          <div className="section-tag">Success Stories</div>
-          <h2 className="section-title">What Our Clients Say</h2>
-          <p className="section-subtitle">Real results from job seekers, students, and employers who partnered with OWS.</p>
+          <div className="section-tag">Our Approach</div>
+          <h2 className="section-title">What Sets Odisha Workforce<br />Solutions Apart</h2>
+          <p className="section-subtitle">People-centric, result-oriented, and impact-driven — tailored solutions built for long-term, measurable success.</p>
         </motion.div>
         <motion.div className="testi-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-          {TESTIMONIALS.map((t) => (
-            <motion.div key={t.name} className="testi-card" variants={staggerItem} whileHover={{ y: -8 }}>
-              <div className="testi-stars">★★★★★</div>
-              <blockquote>"{t.quote}"</blockquote>
-              <div className="testi-author">
-                <div className="testi-avatar-wrap">
-                  <div className="testi-av" style={{ background: t.grad }}>
-                    {t.name.split(' ').map((n) => n[0]).join('')}
-                  </div>
-                  <div className="testi-av-ring" style={{ borderColor: t.color }} />
-                </div>
-                <div>
-                  <div className="testi-name">{t.name}</div>
-                  <div className="testi-role">{t.role}</div>
-                  <div className="testi-company">{t.company}</div>
-                </div>
-              </div>
+          {APPROACH.map((t) => (
+            <motion.div key={t.title} className="testi-card" variants={staggerItem} whileHover={{ y: -8 }}>
+              <div className="testi-av" style={{ background: t.color }}><t.Icon size={26} strokeWidth={1.9} color="#fff" /></div>
+              <h4 className="testi-name" style={{ marginTop: '16px' }}>{t.title}</h4>
+              <p style={{ color: 'var(--gray)', marginTop: '8px', lineHeight: 1.6 }}>{t.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -1103,13 +1176,13 @@ function CTA() {
           <div className="cta-contact-card">
             <h4>Contact Odisha Workforce Solutions</h4>
             {[
-              { icon: '📍', text: 'Plot No-10, Baidyanathapur, Near Hiteech Square, Satya Vihar, BBSR – 751017' },
-              { icon: '📞', text: '+91 9090117679 (OP) · +91 9090117678 (Calling)' },
-              { icon: '✉️', text: 'info@odishaworkforce.com' },
-              { icon: '🌐', text: 'odishaworkforce.com' },
+              { Icon: MapPin, text: 'Plot No-10, Baidyanathapur, Near Hiteech Square, Satya Vihar, BBSR – 751017' },
+              { Icon: Phone, text: '+91 9090117679 (OP) · +91 9090117678 (Calling)' },
+              { Icon: Mail, text: 'info@odishaworkforce.com' },
+              { Icon: Globe, text: 'odishaworkforce.com' },
             ].map((c) => (
-              <div key={c.icon} className="cta-contact-row">
-                <span className="cta-ci">{c.icon}</span><span>{c.text}</span>
+              <div key={c.text} className="cta-contact-row">
+                <span className="cta-ci"><c.Icon size={18} strokeWidth={2} /></span><span>{c.text}</span>
               </div>
             ))}
           </div>
@@ -1430,16 +1503,12 @@ export default function App() {
         {page === 'home' && (
           <motion.div key="home" {...PAGE_TRANSITION}>
             <Hero onNavigate={navigate} />
-            <TrustedBy />
-            <Stats />
-            <Categories onNavigate={navigate} />
+            <AboutIntro />
+            <WhoWeAre />
             <Services onNavigate={navigate} />
-            <FeaturedJobs onNavigate={navigate} />
-            <Process />
-            <Platform onNavigate={navigate} />
-            <StudyAbroad />
             <WhyChoose onNavigate={navigate} />
             <Testimonials />
+            <BasedInOdisha />
             <CTA />
           </motion.div>
         )}

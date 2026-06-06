@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
+import { Award } from 'lucide-react'
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
+const fadeRight = { hidden: { opacity: 0, x: 44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } } }
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } }
 const staggerItem = { hidden: { opacity: 0, y: 26 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }
 const VP = { once: true, margin: '-60px' }
@@ -99,8 +101,9 @@ export default function Industries({ onNavigate }) {
         <div className="page-hero-orb page-hero-orb-1" />
         <div className="page-hero-orb page-hero-orb-2" />
         <div className="container">
-          <motion.div className="page-hero-inner" initial="hidden" animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          <div className="page-hero-inner with-visual">
+            <motion.div className="page-hero-content" initial="hidden" animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
             <motion.div className="page-breadcrumb" variants={fadeUp}>
               <button className="page-breadcrumb-link" onClick={() => onNavigate('home')}>Home</button>
               <span className="page-breadcrumb-sep">›</span>
@@ -130,7 +133,22 @@ export default function Industries({ onNavigate }) {
                 View All Services
               </motion.button>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="page-hero-visual" initial="hidden" animate="visible" variants={fadeRight}>
+              <motion.div className="indx-hero-mosaic"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+                {INDUSTRIES.slice(0, 9).map((ind) => (
+                  <div key={ind.label} className="indx-hero-tile"
+                    style={{ background: ind.bg, color: ind.color, borderColor: `${ind.color}33` }}
+                    title={ind.label}>
+                    {ind.icon}
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -176,7 +194,7 @@ export default function Industries({ onNavigate }) {
       <section className="section-pad" style={{ background: 'var(--light)' }}>
         <div className="container">
           <motion.div className="indx-excellence" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-            <div className="indx-excellence-icon">🏆</div>
+            <div className="indx-excellence-icon"><Award size={34} strokeWidth={1.8} /></div>
             <h2 className="indx-excellence-title">Delivering Workforce Excellence Across Industries</h2>
             <p className="indx-excellence-text">
               With a strong employer network and industry expertise, Odisha Workforce Solutions is committed

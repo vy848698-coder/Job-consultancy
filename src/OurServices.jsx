@@ -1,7 +1,18 @@
 import { motion } from 'framer-motion'
+import { Users, Building2, GraduationCap, TrendingUp, Compass, Plane, Check, LayoutGrid } from 'lucide-react'
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
+const fadeRight = { hidden: { opacity: 0, x: 44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } } }
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }
+
+const HERO_AREAS = [
+  { Icon: Users, label: 'Recruitment & Staffing', color: '#2563EB' },
+  { Icon: Building2, label: 'HR Consulting & Planning', color: '#059669' },
+  { Icon: GraduationCap, label: 'Campus Recruitment', color: '#7C3AED' },
+  { Icon: TrendingUp, label: 'Skill Development', color: '#EA580C' },
+  { Icon: Compass, label: 'Career Counselling', color: '#0891B2' },
+  { Icon: Plane, label: 'Education Consultancy', color: '#DB2777' },
+]
 const staggerItem = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }
 const VP = { once: true, margin: '-80px' }
 
@@ -128,8 +139,9 @@ export default function OurServices({ onNavigate }) {
         <div className="page-hero-orb page-hero-orb-1" />
         <div className="page-hero-orb page-hero-orb-2" />
         <div className="container">
-          <motion.div className="page-hero-inner" initial="hidden" animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          <div className="page-hero-inner with-visual">
+            <motion.div className="page-hero-content" initial="hidden" animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
             <motion.div className="page-breadcrumb" variants={fadeUp}>
               <button className="page-breadcrumb-link" onClick={() => onNavigate('home')}>Home</button>
               <span className="page-breadcrumb-sep">›</span>
@@ -158,7 +170,31 @@ export default function OurServices({ onNavigate }) {
                 Talk to an Expert
               </motion.button>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="page-hero-visual" initial="hidden" animate="visible" variants={fadeRight}>
+              <motion.div className="svc-hero-panel"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+                <div className="svc-hero-panel-head">
+                  <span className="svc-hero-panel-badge"><LayoutGrid size={18} strokeWidth={2} /></span>
+                  <div>
+                    <div className="svc-hero-panel-title">Our Service Areas</div>
+                    <div className="svc-hero-panel-sub">End-to-end workforce & education support</div>
+                  </div>
+                </div>
+                {HERO_AREAS.map((a) => (
+                  <div key={a.label} className="svc-hero-row">
+                    <span className="svc-hero-row-icon" style={{ background: `${a.color}18`, color: a.color }}>
+                      <a.Icon size={17} strokeWidth={1.9} />
+                    </span>
+                    <span className="svc-hero-row-label">{a.label}</span>
+                    <Check size={15} strokeWidth={3} className="svc-hero-row-check" />
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

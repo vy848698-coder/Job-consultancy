@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { QRCodeCanvas } from 'qrcode.react'
+import {
+  Phone, Mail, MapPin, Clock, MessageCircle,
+  CreditCard, Landmark, Smartphone, Lock, CheckCircle2, Settings, Factory, Building2, Handshake, Headset,
+} from 'lucide-react'
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
 const fadeLeft = { hidden: { opacity: 0, x: -44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
@@ -10,10 +14,10 @@ const staggerItem = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0
 const VP = { once: true, margin: '-80px' }
 
 const INFO_CARDS = [
-  { emoji: '📞', title: 'Call Us', lines: ['+91 9090117678'], sub: 'Mon–Sat · 9 AM to 7 PM IST', href: 'tel:+919090117678', color: '#2563EB', bg: '#EFF6FF' },
-  { emoji: '📧', title: 'Email Us', lines: ['info@owsodisha.com'], sub: 'We reply within 24 hours', href: 'mailto:info@owsodisha.com', color: '#059669', bg: '#F0FDF4' },
-  { emoji: '📍', title: 'Visit Us', lines: ['Bhubaneswar, Odisha', 'India – 751001'], sub: 'Walk-in appointments welcome', href: null, color: '#D97706', bg: '#FFFBEB' },
-  { emoji: '🕐', title: 'Office Hours', lines: ['Mon – Sat: 9 AM – 7 PM', 'Sunday: Closed'], sub: 'Holidays may vary', href: null, color: '#7C3AED', bg: '#F5F3FF' },
+  { Icon: Phone, title: 'Call Us', lines: ['+91 9090117678'], sub: 'Mon–Sat · 9 AM to 7 PM IST', href: 'tel:+919090117678', color: '#2563EB', bg: '#EFF6FF' },
+  { Icon: Mail, title: 'Email Us', lines: ['info@owsodisha.com'], sub: 'We reply within 24 hours', href: 'mailto:info@owsodisha.com', color: '#059669', bg: '#F0FDF4' },
+  { Icon: MapPin, title: 'Visit Us', lines: ['Bhubaneswar, Odisha', 'India – 751001'], sub: 'Walk-in appointments welcome', href: null, color: '#D97706', bg: '#FFFBEB' },
+  { Icon: Clock, title: 'Office Hours', lines: ['Mon – Sat: 9 AM – 7 PM', 'Sunday: Closed'], sub: 'Holidays may vary', href: null, color: '#7C3AED', bg: '#F5F3FF' },
 ]
 
 const SUBJECTS = ['Job Seekers – Career Guidance', 'Employers – Hiring Solutions', 'Education Consultancy', 'Study Abroad', 'Franchise Enquiry', 'Training & Skill Development', 'General Enquiry']
@@ -81,8 +85,9 @@ export default function ContactUs({ onNavigate }) {
         <div className="page-hero-orb page-hero-orb-1" />
         <div className="page-hero-orb page-hero-orb-2" />
         <div className="container">
-          <motion.div className="page-hero-inner" initial="hidden" animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          <div className="page-hero-inner with-visual">
+            <motion.div className="page-hero-content" initial="hidden" animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
             <motion.div className="page-breadcrumb" variants={fadeUp}>
               <button className="page-breadcrumb-link" onClick={() => onNavigate('home')}>Home</button>
               <span className="page-breadcrumb-sep">›</span>
@@ -110,7 +115,35 @@ export default function ContactUs({ onNavigate }) {
                 Pay Now
               </motion.a>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="page-hero-visual" initial="hidden" animate="visible" variants={fadeRight}>
+              <motion.div className="svc-hero-panel"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+                <div className="svc-hero-panel-head">
+                  <span className="svc-hero-panel-badge"><Headset size={18} strokeWidth={2} /></span>
+                  <div>
+                    <div className="svc-hero-panel-title">Get in Touch</div>
+                    <div className="svc-hero-panel-sub">Response within 24 hours</div>
+                  </div>
+                </div>
+                {[
+                  { Icon: Phone, label: '+91 9090117678', color: '#2563EB' },
+                  { Icon: Mail, label: 'info@owsodisha.com', color: '#059669' },
+                  { Icon: MessageCircle, label: 'Chat on WhatsApp', color: '#25D366' },
+                  { Icon: MapPin, label: 'Bhubaneswar, Odisha', color: '#D97706' },
+                ].map((a) => (
+                  <div key={a.label} className="svc-hero-row">
+                    <span className="svc-hero-row-icon" style={{ background: `${a.color}18`, color: a.color }}>
+                      <a.Icon size={17} strokeWidth={1.9} />
+                    </span>
+                    <span className="svc-hero-row-label">{a.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -122,7 +155,7 @@ export default function ContactUs({ onNavigate }) {
               const Wrap = c.href ? motion.a : motion.div
               return (
                 <Wrap key={c.title} href={c.href || undefined} className="contact-info-card" variants={staggerItem} whileHover={{ y: -5 }}>
-                  <div className="cic-icon" style={{ background: c.bg, color: c.color }}>{c.emoji}</div>
+                  <div className="cic-icon" style={{ background: c.bg, color: c.color }}><c.Icon size={24} strokeWidth={1.9} /></div>
                   <div className="cic-title">{c.title}</div>
                   {c.lines.map((l) => <div key={l} className="cic-line" style={c.href ? { color: c.color } : undefined}>{l}</div>)}
                   <div className="cic-sub">{c.sub}</div>
@@ -147,7 +180,7 @@ export default function ContactUs({ onNavigate }) {
                 <AnimatePresence mode="wait">
                   {submitted ? (
                     <motion.div key="ok" className="contact-success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
-                      <div className="contact-success-icon">✅</div>
+                      <div className="contact-success-icon"><CheckCircle2 size={48} strokeWidth={1.8} color="#10B981" /></div>
                       <h3>Application Submitted!</h3>
                       <p>Thank you, {form.name || 'friend'}! Our team will contact you within 24 hours. To confirm your registration, complete the payment below.</p>
                       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', marginTop: 16 }}>
@@ -217,12 +250,14 @@ export default function ContactUs({ onNavigate }) {
             {/* Side info */}
             <motion.div className="contact-side" variants={fadeRight} initial="hidden" whileInView="visible" viewport={VP}>
               <div className="contact-side-card">
-                <div className="contact-side-icon">📍</div>
-                <h3 className="contact-side-title">Our Office</h3>
+                <div className="contact-side-head">
+                  <span className="contact-side-icon"><MapPin size={20} strokeWidth={2} /></span>
+                  <h3 className="contact-side-title">Our Office</h3>
+                </div>
                 <p className="contact-side-addr">Odisha Workforce Solutions<br />Bhubaneswar, Odisha<br />India – 751001</p>
                 <a href="https://maps.google.com/?q=Bhubaneswar+Odisha" target="_blank" rel="noreferrer" className="contact-map-placeholder contact-map-clickable">
                   <div className="contact-map-inner">
-                    <span className="contact-map-pin">📍</span>
+                    <span className="contact-map-pin"><MapPin size={28} strokeWidth={2} /></span>
                     <div className="contact-map-label">Bhubaneswar, Odisha</div>
                     <span className="contact-map-link">Open in Google Maps →</span>
                   </div>
@@ -233,14 +268,18 @@ export default function ContactUs({ onNavigate }) {
                 <div className="contact-social-title">Connect With Us</div>
                 <div className="contact-social-links">
                   {[
-                    { name: 'WhatsApp', emoji: '💬', href: 'https://wa.me/919090117678', color: '#25D366' },
-                    { name: 'LinkedIn', emoji: '💼', href: '#', color: '#0A66C2' },
-                    { name: 'Facebook', emoji: '📘', href: '#', color: '#1877F2' },
-                    { name: 'Instagram', emoji: '📸', href: '#', color: '#E4405F' },
+                    { name: 'WhatsApp', href: 'https://wa.me/919090117678', color: '#25D366',
+                      svg: <MessageCircle size={18} strokeWidth={2} /> },
+                    { name: 'LinkedIn', href: '#', color: '#0A66C2',
+                      svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg> },
+                    { name: 'Facebook', href: '#', color: '#1877F2',
+                      svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 21.5v-8.01H5.6V9.5h3.6V7.49c0-3.57 1.73-5.24 4.7-5.24 1.42 0 2.18.1 2.54.15v3.5h-2.04c-1.26 0-1.7.66-1.7 2v1.6h3.7l-.5 3.99H12.7V21.5H9.2Z"/></svg> },
+                    { name: 'Instagram', href: '#', color: '#E4405F',
+                      svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg> },
                   ].map((s) => (
                     <a key={s.name} href={s.href} className="contact-social-btn" style={{ '--sc': s.color }}
                       target={s.href !== '#' ? '_blank' : undefined} rel="noreferrer">
-                      <span>{s.emoji}</span>
+                      <span>{s.svg}</span>
                       <span>{s.name}</span>
                     </a>
                   ))}
@@ -248,7 +287,7 @@ export default function ContactUs({ onNavigate }) {
               </div>
 
               <a href="#payment" className="contact-pay-teaser">
-                <div className="cpt-icon">💳</div>
+                <div className="cpt-icon"><CreditCard size={22} strokeWidth={2} /></div>
                 <div>
                   <div className="cpt-title">Make a Payment</div>
                   <div className="cpt-sub">Bank transfer or UPI · 100% verified account</div>
@@ -274,10 +313,10 @@ export default function ContactUs({ onNavigate }) {
           {/* Tabs */}
           <div className="pay-tabs">
             <button className={`pay-tab${payTab === 'bank' ? ' active' : ''}`} onClick={() => setPayTab('bank')}>
-              <span className="pay-tab-emoji">🏦</span> Bank Transfer
+              <span className="pay-tab-emoji"><Landmark size={18} strokeWidth={2} /></span> Bank Transfer
             </button>
             <button className={`pay-tab${payTab === 'upi' ? ' active' : ''}`} onClick={() => setPayTab('upi')}>
-              <span className="pay-tab-emoji">📱</span> Scan &amp; Pay (UPI)
+              <span className="pay-tab-emoji"><Smartphone size={18} strokeWidth={2} /></span> Scan &amp; Pay (UPI)
             </button>
           </div>
 
@@ -350,7 +389,8 @@ export default function ContactUs({ onNavigate }) {
           </AnimatePresence>
 
           <div className="pay-safety">
-            <span>🔒 Odisha Workforce Solutions is not responsible for payments made to unauthorized accounts. Always verify the beneficiary name before paying.</span>
+            <Lock size={15} strokeWidth={2} style={{ flexShrink: 0 }} />
+            <span>Odisha Workforce Solutions is not responsible for payments made to unauthorized accounts. Always verify the beneficiary name before paying.</span>
           </div>
         </div>
       </section>
@@ -363,14 +403,14 @@ export default function ContactUs({ onNavigate }) {
           </motion.div>
           <motion.div className="contact-quick-links" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {[
-              { label: 'Our Services', emoji: '⚙️', page: 'services' },
-              { label: 'Industries We Serve', emoji: '🏭', page: 'industries' },
-              { label: 'About Us', emoji: '🏢', page: 'about' },
-              { label: 'Franchise', emoji: '🤝', page: 'franchise' },
+              { label: 'Our Services', Icon: Settings, page: 'services' },
+              { label: 'Industries We Serve', Icon: Factory, page: 'industries' },
+              { label: 'About Us', Icon: Building2, page: 'about' },
+              { label: 'Franchise', Icon: Handshake, page: 'franchise' },
             ].map((l) => (
               <motion.button key={l.label} className="contact-quick-btn" variants={staggerItem}
                 whileHover={{ y: -4 }} onClick={() => onNavigate(l.page)}>
-                <span className="cqb-emoji">{l.emoji}</span>
+                <span className="cqb-emoji"><l.Icon size={22} strokeWidth={1.9} /></span>
                 <span className="cqb-label">{l.label}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </motion.button>

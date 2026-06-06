@@ -1,5 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import {
+  Target, Sparkles, HeartHandshake, Lightbulb, Users, Building2, GraduationCap, Megaphone,
+  TrendingUp, Compass, Plane, FileText, ShieldCheck, Network, Star, Globe, UserRound, School,
+  Phone, Rocket, BadgeCheck, Award, FileCheck2, Briefcase, MapPin,
+} from 'lucide-react'
 import owsBadge from './assets/logo-badge.png'
 
 const fadeUp = {
@@ -39,7 +44,8 @@ const SOLUTION_AREAS = [
 const FOUNDATION = [
   {
     key: 'mission',
-    emoji: '🎯',
+    Icon: Target,
+    color: '#2563EB',
     label: 'Our Mission',
     title: 'Creating Sustainable Opportunities',
     desc: 'To create sustainable career opportunities, develop industry-ready talent, and deliver innovative workforce solutions that enable individuals and organizations to grow together.',
@@ -47,7 +53,8 @@ const FOUNDATION = [
   },
   {
     key: 'vision',
-    emoji: '🌟',
+    Icon: Sparkles,
+    color: '#7C3AED',
     label: 'Our Vision',
     title: 'A Recognized Global Leader',
     desc: 'To become a trusted and recognized leader in workforce solutions, recruitment services, and education consultancy by transforming careers and empowering businesses globally.',
@@ -55,7 +62,8 @@ const FOUNDATION = [
   },
   {
     key: 'why',
-    emoji: '🤝',
+    Icon: HeartHandshake,
+    color: '#059669',
     label: 'Why Choose Us',
     title: 'People Are Our Foundation',
     desc: 'We believe people are the foundation of every successful organization. Our experienced team collaborates closely with clients, employers, institutions, and candidates to deliver customized and effective solutions.',
@@ -63,7 +71,8 @@ const FOUNDATION = [
   },
   {
     key: 'what',
-    emoji: '💡',
+    Icon: Lightbulb,
+    color: '#D97706',
     label: 'Our Services',
     title: 'Solutions Built Around You',
     desc: 'We provide a wide range of services designed to meet the evolving needs of job seekers, students, employers, and educational institutions.',
@@ -74,49 +83,49 @@ const FOUNDATION = [
 /* ── 8 Core Services with expandable "Learn More" detail ── */
 const CORE_SERVICES = [
   {
-    emoji: '🎯',
+    Icon: Users,
     title: 'Recruitment & Staffing Solutions',
     desc: 'Helping organizations identify, attract, and hire qualified professionals for various roles and industries.',
     more: 'We handle the complete hiring cycle — sourcing, screening, shortlisting, and onboarding — so organizations across every industry secure the right professionals quickly and reliably.',
   },
   {
-    emoji: '🏢',
+    Icon: Building2,
     title: 'HR Consulting & Workforce Planning',
     desc: 'Strategic human resource solutions to improve workforce efficiency and organizational growth.',
     more: 'Our HR experts advise on workforce structuring, policies, and planning, helping organizations build efficient, future-ready teams that support long-term growth.',
   },
   {
-    emoji: '🎓',
+    Icon: GraduationCap,
     title: 'Campus Recruitment Drives',
     desc: 'Connecting employers with fresh talent through organized campus hiring programs.',
     more: 'We organize end-to-end campus hiring programs — coordinating with colleges, managing assessments and interviews, and connecting employers with promising fresh talent.',
   },
   {
-    emoji: '🤝',
+    Icon: Megaphone,
     title: 'Mega Job Fairs & Bulk Hiring',
     desc: 'Managing large-scale recruitment campaigns and employment events.',
     more: 'From planning to execution, we manage large-scale job fairs and bulk hiring campaigns that bring employers and job seekers together for fast, high-volume recruitment.',
   },
   {
-    emoji: '📈',
+    Icon: TrendingUp,
     title: 'Skill Development & Training Programs',
     desc: 'Industry-focused training initiatives designed to improve employability and workforce readiness.',
     more: 'Our practical, industry-aligned training programs build the technical and soft skills candidates need to become job-ready and confident in the modern workplace.',
   },
   {
-    emoji: '💼',
+    Icon: Compass,
     title: 'Career Counselling & Placement Support',
     desc: 'Personalized guidance and placement assistance for students and job seekers.',
     more: 'We offer one-on-one career counselling to map the right path for each individual, backed by dedicated placement support that connects talent with suitable opportunities.',
   },
   {
-    emoji: '✈️',
+    Icon: Plane,
     title: 'Education Consultancy (India & Abroad)',
     desc: 'Expert support for admissions, career planning, and educational opportunities both in India and internationally.',
     more: 'From course and university selection to admissions and documentation, we guide students through every step of pursuing education in India and abroad.',
   },
   {
-    emoji: '📝',
+    Icon: FileText,
     title: 'Resume Building & Interview Preparation',
     desc: 'Professional resume creation, interview coaching, and career readiness services.',
     more: 'We craft professional, impactful resumes and provide interview coaching so candidates can present themselves confidently and improve their selection chances.',
@@ -125,28 +134,28 @@ const CORE_SERVICES = [
 
 /* ── What Makes Us Different ── */
 const STANDOUT = [
-  { icon: '🛡️', text: 'Professional and transparent processes' },
-  { icon: '🌐', text: 'Strong employer and institutional network' },
-  { icon: '🎯', text: 'Industry-focused recruitment solutions' },
-  { icon: '🤲', text: 'Personalized guidance and support' },
-  { icon: '⭐', text: 'Commitment to quality and client satisfaction' },
-  { icon: '🌏', text: 'Local expertise with a national and global outlook' },
+  { Icon: ShieldCheck, text: 'Professional and transparent processes' },
+  { Icon: Network, text: 'Strong employer and institutional network' },
+  { Icon: Target, text: 'Industry-focused recruitment solutions' },
+  { Icon: HeartHandshake, text: 'Personalized guidance and support' },
+  { Icon: Star, text: 'Commitment to quality and client satisfaction' },
+  { Icon: Globe, text: 'Local expertise with a national and global outlook' },
 ]
 
 /* ── Our Commitment ── */
 const COMMITMENTS = [
-  { emoji: '👤', title: 'Job Seekers', desc: 'Helping job seekers build successful careers.' },
-  { emoji: '🎓', title: 'Students', desc: 'Helping students achieve their educational goals.' },
-  { emoji: '🏢', title: 'Employers', desc: 'Helping employers find the right talent.' },
-  { emoji: '🏫', title: 'Institutions', desc: 'Helping institutions strengthen workforce readiness.' },
+  { Icon: UserRound, color: '#2563EB', title: 'Job Seekers', desc: 'Helping job seekers build successful careers.' },
+  { Icon: GraduationCap, color: '#059669', title: 'Students', desc: 'Helping students achieve their educational goals.' },
+  { Icon: Building2, color: '#D97706', title: 'Employers', desc: 'Helping employers find the right talent.' },
+  { Icon: School, color: '#7C3AED', title: 'Institutions', desc: 'Helping institutions strengthen workforce readiness.' },
 ]
 
 /* ── Credentials (factual, from the company profile) ── */
 const STATS = [
-  { value: 'ISO 9001:2015', label: 'Certified', color: '#2563EB' },
-  { value: 'MSME', label: 'Registered', color: '#059669' },
-  { value: 'GST', label: 'Compliant', color: '#D97706' },
-  { value: 'India & Abroad', label: 'Service Reach', color: '#7C3AED' },
+  { Icon: BadgeCheck, value: 'ISO 9001:2015', label: 'Certified', color: '#2563EB' },
+  { Icon: Award, value: 'MSME', label: 'Registered', color: '#059669' },
+  { Icon: FileCheck2, value: 'GST', label: 'Compliant', color: '#D97706' },
+  { Icon: Globe, value: 'India & Abroad', label: 'Service Reach', color: '#7C3AED' },
 ]
 
 export default function AboutUs({ onNavigate }) {
@@ -161,12 +170,13 @@ export default function AboutUs({ onNavigate }) {
         <div className="about-hero-orb about-hero-orb-1" />
         <div className="about-hero-orb about-hero-orb-2" />
         <div className="container">
-          <motion.div
-            className="about-hero-inner"
-            initial="hidden"
-            animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-          >
+          <div className="about-hero-inner">
+            <motion.div
+              className="about-hero-content"
+              initial="hidden"
+              animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+            >
             <motion.div className="about-breadcrumb" variants={fadeUp}>
               <button className="about-breadcrumb-link" onClick={() => onNavigate('home')}>Home</button>
               <span className="about-breadcrumb-sep">›</span>
@@ -196,7 +206,31 @@ export default function AboutUs({ onNavigate }) {
                 Call Us Now
               </motion.a>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="about-hero-visual" initial="hidden" animate="visible" variants={fadeRight}>
+              <div className="about-hv-grid">
+                {[
+                  { Icon: Users, label: 'Recruitment & Staffing', color: '#2563EB' },
+                  { Icon: GraduationCap, label: 'Education Consultancy', color: '#059669' },
+                  { Icon: TrendingUp, label: 'Skill Development', color: '#D97706' },
+                  { Icon: Briefcase, label: 'HR & Workforce Services', color: '#7C3AED' },
+                ].map((c, i) => (
+                  <motion.div
+                    key={c.label}
+                    className="about-hv-card"
+                    animate={{ y: [0, i % 2 === 0 ? -10 : 10, 0] }}
+                    transition={{ duration: 5 + i, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <span className="about-hv-icon" style={{ background: `${c.color}18`, color: c.color }}>
+                      <c.Icon size={26} strokeWidth={1.9} />
+                    </span>
+                    <span className="about-hv-label">{c.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -205,8 +239,11 @@ export default function AboutUs({ onNavigate }) {
         <div className="container">
           <motion.div className="about-stats-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {STATS.map((s) => (
-              <motion.div key={s.label} className="about-stat-item" variants={staggerItem}>
-                <div className="about-stat-value" style={{ color: s.color }}>{s.value}</div>
+              <motion.div key={s.label} className="about-stat-item" variants={staggerItem} whileHover={{ y: -6 }}>
+                <span className="about-stat-icon" style={{ background: `${s.color}18`, color: s.color }}>
+                  <s.Icon size={24} strokeWidth={2} />
+                </span>
+                <div className="about-stat-value">{s.value}</div>
                 <div className="about-stat-label">{s.label}</div>
               </motion.div>
             ))}
@@ -253,7 +290,7 @@ export default function AboutUs({ onNavigate }) {
                   <div className="about-logo-name">Odisha Workforce Solutions</div>
                   <div className="about-logo-tagline">Empowering People. Enabling Progress.</div>
                   <div className="about-logo-location">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <MapPin size={14} strokeWidth={2} />
                     Bhubaneswar, Odisha, India
                   </div>
                 </div>
@@ -276,7 +313,7 @@ export default function AboutUs({ onNavigate }) {
             {FOUNDATION.map((f) => (
               <motion.div key={f.key} className="about-foundation-card" variants={staggerItem} whileHover={{ y: -8 }}>
                 <span className="about-foundation-bar" style={{ background: f.accent }} />
-                <div className="about-foundation-emoji">{f.emoji}</div>
+                <div className="about-foundation-emoji" style={{ background: `${f.color}18`, color: f.color }}><f.Icon size={28} strokeWidth={1.9} /></div>
                 <div className="about-foundation-label">{f.label}</div>
                 <h3 className="about-foundation-title">{f.title}</h3>
                 <p className="about-foundation-desc">{f.desc}</p>
@@ -306,7 +343,7 @@ export default function AboutUs({ onNavigate }) {
                   variants={staggerItem}
                   whileHover={{ y: -6 }}
                 >
-                  <div className="about-service-emoji">{s.emoji}</div>
+                  <div className="about-service-emoji" style={{ color: 'var(--primary)' }}><s.Icon size={24} strokeWidth={1.9} /></div>
                   <h4 className="about-service-title">{s.title}</h4>
                   <p className="about-service-desc">{s.desc}</p>
 
@@ -355,7 +392,7 @@ export default function AboutUs({ onNavigate }) {
           <motion.div className="about-standout-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {STANDOUT.map((p) => (
               <motion.div key={p.text} className="about-standout-card" variants={staggerItem} whileHover={{ y: -5 }}>
-                <span className="about-standout-icon">{p.icon}</span>
+                <span className="about-standout-icon" style={{ color: 'var(--primary)' }}><p.Icon size={22} strokeWidth={2} /></span>
                 <span className="about-standout-text">{p.text}</span>
               </motion.div>
             ))}
@@ -377,7 +414,7 @@ export default function AboutUs({ onNavigate }) {
           <motion.div className="about-commitment-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {COMMITMENTS.map((c) => (
               <motion.div key={c.title} className="about-commitment-card" variants={staggerItem} whileHover={{ y: -6 }}>
-                <div className="about-commitment-emoji">{c.emoji}</div>
+                <div className="about-commitment-emoji" style={{ background: `${c.color}18`, color: c.color }}><c.Icon size={28} strokeWidth={1.9} /></div>
                 <h4 className="about-commitment-title">{c.title}</h4>
                 <p className="about-commitment-desc">{c.desc}</p>
               </motion.div>
@@ -409,7 +446,7 @@ export default function AboutUs({ onNavigate }) {
             </motion.div>
             <motion.div className="about-serving-contact" variants={fadeRight} initial="hidden" whileInView="visible" viewport={VP}>
               <div className="about-contact-card">
-                <div className="about-contact-icon">📞</div>
+                <div className="about-contact-icon"><Phone size={26} strokeWidth={2} /></div>
                 <div className="about-contact-label">Call Us Anytime</div>
                 <a href="tel:+919090117678" className="about-contact-number">+91 9090117678</a>
                 <p className="about-contact-sub">Mon–Sat · 9 AM to 7 PM IST</p>
@@ -430,7 +467,8 @@ export default function AboutUs({ onNavigate }) {
         <div className="container">
           <motion.div className="about-cta-inner" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             <motion.h2 className="about-cta-title" variants={fadeUp}>
-              Empowering Careers. Strengthening Businesses.<br />Creating Opportunities. 🚀
+              Empowering Careers. Strengthening Businesses.<br />Creating Opportunities.
+              <Rocket size={26} strokeWidth={2} style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: 10 }} />
             </motion.h2>
             <motion.p className="about-cta-sub" variants={fadeUp}>
               Connect with Odisha Workforce Solutions for career opportunities, workforce solutions, and

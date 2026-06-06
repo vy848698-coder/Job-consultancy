@@ -2147,29 +2147,33 @@ body.theme-dark .about-contact-sub { color: rgba(255,255,255,.45) !important; }
 }
 .svc-card {
   position: relative;
-  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, var(--svc-bg) 55%, #ffffff) 100%);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 36px 34px 32px;
-  box-shadow: 0 1px 2px rgba(15,23,42,.04);
-  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  padding: 34px 32px 28px;
+  box-shadow: 0 2px 4px rgba(15,23,42,.04), 0 14px 30px -22px rgba(15,23,42,.16);
+  transition: box-shadow 0.4s cubic-bezier(.22,1,.36,1), transform 0.4s, border-color 0.4s;
   overflow: hidden;
+  isolation: isolate;
 }
-.svc-card::before {
-  content: '';
+.svc-accent {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--accent, #38BDF8));
+  background: linear-gradient(90deg, var(--svc-color), color-mix(in srgb, var(--svc-color) 30%, #fff));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
+  z-index: 2;
 }
 .svc-card:hover {
-  border-color: transparent;
-  box-shadow: 0 24px 60px -18px rgba(15,23,42,.22);
+  border-color: color-mix(in srgb, var(--svc-color) 32%, transparent);
+  box-shadow: 0 30px 60px -24px color-mix(in srgb, var(--svc-color) 50%, transparent), var(--shadow-lg);
 }
-.svc-card:hover::before { transform: scaleX(1); }
+.svc-card:hover .svc-accent { transform: scaleX(1); }
 .svc-card-head {
   display: flex;
   align-items: center;
@@ -2177,29 +2181,38 @@ body.theme-dark .about-contact-sub { color: rgba(255,255,255,.45) !important; }
   margin-bottom: 20px;
 }
 .svc-icon {
-  width: 56px; height: 56px;
+  width: 58px; height: 58px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem;
-  background: var(--light, #F1F5F9);
+  color: var(--svc-color);
+  background: color-mix(in srgb, var(--svc-color) 12%, #fff);
   border-radius: 16px;
-  transition: background 0.3s ease;
+  transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
-.svc-card:hover .svc-icon { background: var(--light2, #EFF6FF); }
+.svc-card:hover .svc-icon {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--svc-color) 88%, #fff),
+    color-mix(in srgb, var(--svc-color) 70%, #000));
+  color: #fff;
+  transform: translateY(-2px) rotate(-5deg);
+  box-shadow: 0 12px 26px -8px color-mix(in srgb, var(--svc-color) 75%, transparent);
+}
 .svc-num {
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 800;
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1.4px rgba(15,23,42,.14);
+  -webkit-text-stroke: 1.4px color-mix(in srgb, var(--svc-color) 32%, transparent);
   letter-spacing: -0.02em;
   user-select: none;
+  transition: -webkit-text-stroke-color 0.3s;
 }
+.svc-card:hover .svc-num { -webkit-text-stroke-color: color-mix(in srgb, var(--svc-color) 55%, transparent); }
 .svc-title {
-  font-size: 1.18rem;
+  font-size: 1.16rem;
   font-weight: 800;
   color: var(--dark);
   line-height: 1.3;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   margin-bottom: 10px;
 }
 .svc-desc {
@@ -2209,7 +2222,7 @@ body.theme-dark .about-contact-sub { color: rgba(255,255,255,.45) !important; }
 }
 .svc-divider {
   height: 1px;
-  background: var(--border);
+  background: color-mix(in srgb, var(--svc-color) 12%, var(--border));
   margin: 22px 0 20px;
 }
 .svc-list {
@@ -2217,22 +2230,44 @@ body.theme-dark .about-contact-sub { color: rgba(255,255,255,.45) !important; }
   margin: 0; padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 11px 18px;
+  gap: 12px 18px;
 }
 .svc-list-item {
   display: flex;
-  align-items: flex-start;
-  gap: 9px;
+  align-items: center;
+  gap: 10px;
   font-size: 0.84rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--dark);
   line-height: 1.4;
 }
 .svc-check {
   flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--primary);
+  width: 19px; height: 19px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--svc-color) 14%, transparent);
+  color: var(--svc-color);
+  transition: background 0.3s, color 0.3s;
 }
+.svc-card:hover .svc-check { background: var(--svc-color); color: #fff; }
+.svc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: 24px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--svc-color);
+  cursor: pointer;
+  transition: gap 0.2s;
+}
+.svc-link:hover { gap: 10px; }
 
 /* ──────────────────────────────────────
    INDUSTRIES PAGE
@@ -2293,117 +2328,117 @@ body.theme-dark .about-contact-sub { color: rgba(255,255,255,.45) !important; }
 }
 .indx-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background:
-    linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, var(--ind-bg) 55%, #ffffff) 100%);
+    linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, var(--ind-bg) 60%, #ffffff) 100%);
   border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 30px 28px 28px;
-  box-shadow: 0 2px 4px rgba(15,23,42,.04), 0 14px 30px -20px rgba(15,23,42,.18);
-  transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+  border-radius: 20px;
+  padding: 30px 28px 26px;
+  box-shadow: 0 2px 4px rgba(15,23,42,.04), 0 14px 30px -22px rgba(15,23,42,.16);
+  transition: box-shadow 0.4s cubic-bezier(.22,1,.36,1), border-color 0.4s, transform 0.4s;
   overflow: hidden;
   isolation: isolate;
 }
-.indx-card::after {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 180px; height: 180px;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--ind-color) 22%, transparent) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 0;
-}
 .indx-card:hover {
-  border-color: color-mix(in srgb, var(--ind-color) 38%, transparent);
-  box-shadow:
-    0 1px 0 color-mix(in srgb, var(--ind-color) 30%, transparent) inset,
-    0 30px 60px -24px color-mix(in srgb, var(--ind-color) 55%, transparent);
+  border-color: color-mix(in srgb, var(--ind-color) 32%, transparent);
+  box-shadow: 0 30px 60px -24px color-mix(in srgb, var(--ind-color) 52%, transparent), var(--shadow-lg);
 }
-.indx-card:hover::after { opacity: 1; }
 .indx-accent {
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--ind-color), color-mix(in srgb, var(--ind-color) 35%, #fff));
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--ind-color), color-mix(in srgb, var(--ind-color) 30%, #fff));
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+  transition: transform 0.4s ease;
   z-index: 2;
 }
 .indx-card:hover .indx-accent { transform: scaleX(1); }
-.indx-head {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid color-mix(in srgb, var(--ind-color) 12%, var(--border));
-  position: relative;
-  z-index: 1;
-}
 .indx-icon {
-  width: 58px; height: 58px;
+  width: 54px; height: 54px;
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.7rem;
-  background: linear-gradient(145deg,
-    color-mix(in srgb, var(--ind-color) 20%, #fff),
-    color-mix(in srgb, var(--ind-color) 7%, #fff));
-  border: 1px solid color-mix(in srgb, var(--ind-color) 22%, transparent);
-  border-radius: 17px;
-  box-shadow:
-    0 8px 18px -8px color-mix(in srgb, var(--ind-color) 60%, transparent),
-    inset 0 1px 0 rgba(255,255,255,.6);
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  color: var(--ind-color);
+  background: color-mix(in srgb, var(--ind-color) 12%, #fff);
+  border-radius: 15px;
+  margin-bottom: 16px;
+  transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
-.indx-card:hover .indx-icon { transform: scale(1.1) rotate(-5deg); }
+.indx-icon svg { width: 24px; height: 24px; }
+.indx-card:hover .indx-icon {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--ind-color) 88%, #fff),
+    color-mix(in srgb, var(--ind-color) 70%, #000));
+  color: #fff;
+  transform: translateY(-2px) rotate(-5deg);
+  box-shadow: 0 12px 24px -8px color-mix(in srgb, var(--ind-color) 75%, transparent);
+}
+.indx-tag {
+  display: inline-block;
+  align-self: flex-start;
+  background: color-mix(in srgb, var(--ind-color) 12%, #fff);
+  color: var(--ind-color);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
 .indx-title {
-  font-size: 1.06rem;
+  font-size: 1.04rem;
   font-weight: 800;
   color: var(--dark);
   line-height: 1.32;
   letter-spacing: -0.015em;
+  margin-bottom: 16px;
 }
 .indx-roles {
   list-style: none;
-  margin: 0; padding: 0;
+  margin: 0 0 4px; padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  position: relative;
-  z-index: 1;
+  gap: 9px;
+  flex: 1;
 }
 .indx-role {
   display: flex;
   align-items: center;
-  gap: 11px;
-  font-size: 0.86rem;
+  gap: 10px;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--gray);
-  line-height: 1.45;
-  padding: 6px 0;
+  line-height: 1.4;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 .indx-card:hover .indx-role { color: var(--dark); }
 .indx-role:hover { transform: translateX(3px); }
 .indx-bullet {
-  width: 20px; height: 20px;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--ind-color) 14%, transparent);
-  color: var(--ind-color);
-  position: relative;
-}
-.indx-bullet::after {
-  content: '';
   width: 6px; height: 6px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--ind-color);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ind-color) 18%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ind-color) 16%, transparent);
 }
+.indx-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin-top: 18px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ind-color);
+  cursor: pointer;
+  transition: gap 0.2s;
+}
+.indx-link:hover { gap: 9px; }
 
 /* Excellence band */
 .indx-excellence {

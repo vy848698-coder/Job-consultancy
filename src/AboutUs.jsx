@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import owsLogo from './assets/logo.png'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import owsBadge from './assets/logo-badge.png'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -23,41 +24,134 @@ const staggerItem = {
 }
 const VP = { once: true, margin: '-80px' }
 
+/* ── Comprehensive solution areas (from the company profile) ── */
+const SOLUTION_AREAS = [
+  'Recruitment & Staffing',
+  'Workforce Development',
+  'HR Consulting',
+  'Skill Development',
+  'Campus Hiring',
+  'Education Consultancy',
+  'Career Support Services',
+]
+
+/* ── Foundation: Mission · Vision · Why Choose Us · What We Do (4 cards) ── */
+const FOUNDATION = [
+  {
+    key: 'mission',
+    emoji: '🎯',
+    label: 'Our Mission',
+    title: 'Creating Sustainable Opportunities',
+    desc: 'To create sustainable career opportunities, develop industry-ready talent, and deliver innovative workforce solutions that enable individuals and organizations to grow together.',
+    accent: 'linear-gradient(90deg, #2563EB, #38BDF8)',
+  },
+  {
+    key: 'vision',
+    emoji: '🌟',
+    label: 'Our Vision',
+    title: 'A Recognized Global Leader',
+    desc: 'To become a trusted and recognized leader in workforce solutions, recruitment services, and education consultancy by transforming careers and empowering businesses globally.',
+    accent: 'linear-gradient(90deg, #7C3AED, #EC4899)',
+  },
+  {
+    key: 'why',
+    emoji: '🤝',
+    label: 'Why Choose Us',
+    title: 'People Are Our Foundation',
+    desc: 'We believe people are the foundation of every successful organization. Our experienced team collaborates closely with clients, employers, institutions, and candidates to deliver customized and effective solutions.',
+    accent: 'linear-gradient(90deg, #059669, #34D399)',
+  },
+  {
+    key: 'what',
+    emoji: '💡',
+    label: 'Our Services',
+    title: 'Solutions Built Around You',
+    desc: 'We provide a wide range of services designed to meet the evolving needs of job seekers, students, employers, and educational institutions.',
+    accent: 'linear-gradient(90deg, #D97706, #FBBF24)',
+  },
+]
+
+/* ── 8 Core Services with expandable "Learn More" detail ── */
 const CORE_SERVICES = [
-  { emoji: '🎯', title: 'Recruitment & Staffing', desc: 'End-to-end permanent and contract staffing solutions across all levels and industries.' },
-  { emoji: '🏢', title: 'HR Consulting & Workforce Planning', desc: 'Strategic HR advisory, workforce structuring, and organizational development support.' },
-  { emoji: '🎓', title: 'Campus Recruitment Drives', desc: 'Structured campus hiring programs connecting top colleges with leading employers.' },
-  { emoji: '🤝', title: 'Mega Job Fairs & Bulk Hiring', desc: 'Large-scale hiring events and bulk recruitment drives for high-volume workforce needs.' },
-  { emoji: '📈', title: 'Skill Development & Training', desc: 'Industry-focused training programs to make candidates job-ready with market-relevant skills.' },
-  { emoji: '💼', title: 'Career Counselling & Placement', desc: 'One-on-one guidance to map ideal career paths and connect talent with the right roles.' },
-  { emoji: '✈️', title: 'Education Consultancy (India & Abroad)', desc: 'Study abroad guidance, university selection, and visa support for aspirational students.' },
-  { emoji: '📝', title: 'Resume Building & Interview Prep', desc: 'Professional resume crafting and mock interview coaching to maximize selection rates.' },
+  {
+    emoji: '🎯',
+    title: 'Recruitment & Staffing Solutions',
+    desc: 'Helping organizations identify, attract, and hire qualified professionals for various roles and industries.',
+    more: 'We handle the complete hiring cycle — sourcing, screening, shortlisting, and onboarding — so organizations across every industry secure the right professionals quickly and reliably.',
+  },
+  {
+    emoji: '🏢',
+    title: 'HR Consulting & Workforce Planning',
+    desc: 'Strategic human resource solutions to improve workforce efficiency and organizational growth.',
+    more: 'Our HR experts advise on workforce structuring, policies, and planning, helping organizations build efficient, future-ready teams that support long-term growth.',
+  },
+  {
+    emoji: '🎓',
+    title: 'Campus Recruitment Drives',
+    desc: 'Connecting employers with fresh talent through organized campus hiring programs.',
+    more: 'We organize end-to-end campus hiring programs — coordinating with colleges, managing assessments and interviews, and connecting employers with promising fresh talent.',
+  },
+  {
+    emoji: '🤝',
+    title: 'Mega Job Fairs & Bulk Hiring',
+    desc: 'Managing large-scale recruitment campaigns and employment events.',
+    more: 'From planning to execution, we manage large-scale job fairs and bulk hiring campaigns that bring employers and job seekers together for fast, high-volume recruitment.',
+  },
+  {
+    emoji: '📈',
+    title: 'Skill Development & Training Programs',
+    desc: 'Industry-focused training initiatives designed to improve employability and workforce readiness.',
+    more: 'Our practical, industry-aligned training programs build the technical and soft skills candidates need to become job-ready and confident in the modern workplace.',
+  },
+  {
+    emoji: '💼',
+    title: 'Career Counselling & Placement Support',
+    desc: 'Personalized guidance and placement assistance for students and job seekers.',
+    more: 'We offer one-on-one career counselling to map the right path for each individual, backed by dedicated placement support that connects talent with suitable opportunities.',
+  },
+  {
+    emoji: '✈️',
+    title: 'Education Consultancy (India & Abroad)',
+    desc: 'Expert support for admissions, career planning, and educational opportunities both in India and internationally.',
+    more: 'From course and university selection to admissions and documentation, we guide students through every step of pursuing education in India and abroad.',
+  },
+  {
+    emoji: '📝',
+    title: 'Resume Building & Interview Preparation',
+    desc: 'Professional resume creation, interview coaching, and career readiness services.',
+    more: 'We craft professional, impactful resumes and provide interview coaching so candidates can present themselves confidently and improve their selection chances.',
+  },
 ]
 
-const WHY_POINTS = [
-  { icon: '✔', text: 'Professional and transparent processes' },
-  { icon: '✔', text: 'Strong employer and institutional network' },
-  { icon: '✔', text: 'Industry-focused recruitment solutions' },
-  { icon: '✔', text: 'Personalized guidance and support' },
-  { icon: '✔', text: 'Commitment to quality and client satisfaction' },
-  { icon: '✔', text: 'Local expertise with a national and global outlook' },
+/* ── What Makes Us Different ── */
+const STANDOUT = [
+  { icon: '🛡️', text: 'Professional and transparent processes' },
+  { icon: '🌐', text: 'Strong employer and institutional network' },
+  { icon: '🎯', text: 'Industry-focused recruitment solutions' },
+  { icon: '🤲', text: 'Personalized guidance and support' },
+  { icon: '⭐', text: 'Commitment to quality and client satisfaction' },
+  { icon: '🌏', text: 'Local expertise with a national and global outlook' },
 ]
 
+/* ── Our Commitment ── */
 const COMMITMENTS = [
-  { emoji: '👤', title: 'Job Seekers', desc: 'Build successful careers with expert guidance, skill development, and the right opportunities.' },
-  { emoji: '🎓', title: 'Students', desc: 'Achieve educational goals with trusted consultancy for colleges and universities in India and abroad.' },
-  { emoji: '🏢', title: 'Employers', desc: 'Find the right talent efficiently with tailored, high-quality recruitment and staffing solutions.' },
-  { emoji: '🏫', title: 'Institutions', desc: 'Strengthen workforce readiness through structured campus placements and skill programs.' },
+  { emoji: '👤', title: 'Job Seekers', desc: 'Helping job seekers build successful careers.' },
+  { emoji: '🎓', title: 'Students', desc: 'Helping students achieve their educational goals.' },
+  { emoji: '🏢', title: 'Employers', desc: 'Helping employers find the right talent.' },
+  { emoji: '🏫', title: 'Institutions', desc: 'Helping institutions strengthen workforce readiness.' },
 ]
 
+/* ── Credentials (factual, from the company profile) ── */
 const STATS = [
-  { value: '5000+', label: 'Candidates Placed', color: '#2563EB' },
-  { value: '300+', label: 'Employer Partners', color: '#059669' },
-  { value: '95%', label: 'Client Retention', color: '#D97706' },
-  { value: '8+', label: 'Years of Excellence', color: '#7C3AED' },
+  { value: 'ISO 9001:2015', label: 'Certified', color: '#2563EB' },
+  { value: 'MSME', label: 'Registered', color: '#059669' },
+  { value: 'GST', label: 'Compliant', color: '#D97706' },
+  { value: 'India & Abroad', label: 'Service Reach', color: '#7C3AED' },
 ]
 
 export default function AboutUs({ onNavigate }) {
+  const [openCard, setOpenCard] = useState(null)
+
   return (
     <div className="about-page">
 
@@ -88,9 +182,9 @@ export default function AboutUs({ onNavigate }) {
               Solutions
             </motion.h1>
             <motion.p className="about-hero-sub" variants={fadeUp}>
-              Headquartered in Bhubaneswar, Odisha Workforce Solutions (OWS) is a leading recruitment,
-              education consultancy, and workforce development organization — dedicated to connecting
-              talent with opportunity across India and abroad.
+              Odisha Workforce Solutions (OWS) is a leading recruitment, education consultancy, and
+              workforce development organization dedicated to connecting talent with opportunities —
+              across India and abroad.
             </motion.p>
             <motion.div className="about-hero-actions" variants={fadeUp}>
               <motion.button className="btn btn-primary" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
@@ -126,32 +220,36 @@ export default function AboutUs({ onNavigate }) {
           <div className="about-who-grid">
             <motion.div className="about-who-left" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={VP}>
               <div className="section-tag">Who We Are</div>
-              <h2 className="section-title">Empowering People.<br />Enabling Progress.</h2>
+              <h2 className="section-title">Your Trusted Partner in<br />Workforce & Education</h2>
               <p className="about-para">
                 Odisha Workforce Solutions (OWS) is a leading recruitment, education consultancy, and
-                workforce development organization dedicated to connecting talent with opportunity.
+                workforce development organization dedicated to connecting talent with opportunities.
               </p>
               <p className="about-para">
-                Founded with the vision of empowering individuals and supporting organizational growth,
-                we provide comprehensive solutions in Recruitment, Staffing, Skill Development, HR Services,
-                Campus Hiring, and Education Consultancy across India and abroad.
+                Founded with a vision to empower individuals and support organizational growth, OWS
+                delivers comprehensive solutions across the workforce and education ecosystem:
               </p>
-              <p className="about-para">
-                We are an <strong>ISO 9001:2015 Certified</strong>, <strong>MSME-registered</strong>, and{' '}
-                <strong>GST-compliant</strong> organization committed to delivering professional, ethical,
-                and result-driven services.
-              </p>
-              <div className="about-badges">
-                {['ISO 9001:2015', 'MSME Registered', 'GST Compliant'].map((b) => (
-                  <span key={b} className="about-badge-chip">{b}</span>
+              <div className="about-solution-chips">
+                {SOLUTION_AREAS.map((s) => (
+                  <span key={s} className="about-solution-chip">
+                    <span className="about-solution-dot" />
+                    {s}
+                  </span>
                 ))}
               </div>
+              <p className="about-para" style={{ marginTop: 20 }}>
+                Headquartered in Bhubaneswar, Odisha, OWS is an <strong>ISO 9001:2015 Certified</strong>,{' '}
+                <strong>MSME Registered</strong>, and <strong>GST Compliant</strong> organization committed
+                to providing professional, ethical, and result-oriented services across India and abroad.
+              </p>
             </motion.div>
 
             <motion.div className="about-who-right" variants={fadeRight} initial="hidden" whileInView="visible" viewport={VP}>
               <div className="about-logo-card">
                 <div className="about-logo-card-inner">
-                  <img src={owsLogo} alt="Odisha Workforce Solutions" className="about-logo-large" />
+                  <span className="about-logo-badge-chip">
+                    <img src={owsBadge} alt="Odisha Workforce Solutions" className="about-logo-large" />
+                  </span>
                   <div className="about-logo-name">Odisha Workforce Solutions</div>
                   <div className="about-logo-tagline">Empowering People. Enabling Progress.</div>
                   <div className="about-logo-location">
@@ -166,38 +264,29 @@ export default function AboutUs({ onNavigate }) {
         </div>
       </section>
 
-      {/* ── Mission & Vision ── */}
-      <section className="about-mv section-pad" style={{ background: 'var(--light)' }}>
+      {/* ── Foundation: Mission · Vision · Why Choose Us · What We Do (4 cards) ── */}
+      <section className="about-foundation section-pad" style={{ background: 'var(--light)' }}>
         <div className="container">
           <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-            <div className="section-tag">Our Purpose</div>
-            <h2 className="section-title">Mission & Vision</h2>
-            <p className="section-subtitle">The principles that drive everything we do at Odisha Workforce Solutions.</p>
+            <div className="section-tag">What Drives Us</div>
+            <h2 className="section-title">The Foundation of Everything We Do</h2>
+            <p className="section-subtitle">Our purpose, promise, and approach — built on trust, transparency, and lasting impact.</p>
           </motion.div>
-          <motion.div className="about-mv-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-            <motion.div className="about-mv-card about-mv-mission" variants={staggerItem} whileHover={{ y: -8 }}>
-              <div className="about-mv-icon">🎯</div>
-              <div className="about-mv-label">Our Mission</div>
-              <h3 className="about-mv-title">Creating Sustainable Opportunities</h3>
-              <p className="about-mv-desc">
-                To create sustainable career opportunities, develop industry-ready talent, and provide
-                innovative workforce solutions that help individuals and organizations grow together.
-              </p>
-            </motion.div>
-            <motion.div className="about-mv-card about-mv-vision" variants={staggerItem} whileHover={{ y: -8 }}>
-              <div className="about-mv-icon">🌟</div>
-              <div className="about-mv-label">Our Vision</div>
-              <h3 className="about-mv-title">Recognized Global Leader</h3>
-              <p className="about-mv-desc">
-                To become a trusted and recognized leader in workforce solutions, recruitment services,
-                and education consultancy by transforming careers and empowering businesses globally.
-              </p>
-            </motion.div>
+          <motion.div className="about-foundation-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
+            {FOUNDATION.map((f) => (
+              <motion.div key={f.key} className="about-foundation-card" variants={staggerItem} whileHover={{ y: -8 }}>
+                <span className="about-foundation-bar" style={{ background: f.accent }} />
+                <div className="about-foundation-emoji">{f.emoji}</div>
+                <div className="about-foundation-label">{f.label}</div>
+                <h3 className="about-foundation-title">{f.title}</h3>
+                <p className="about-foundation-desc">{f.desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ── Core Services ── */}
+      {/* ── Core Services: 8 cards with expandable Learn More ── */}
       <section className="about-services section-pad">
         <div className="container">
           <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
@@ -208,77 +297,85 @@ export default function AboutUs({ onNavigate }) {
             </p>
           </motion.div>
           <motion.div className="about-services-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-            {CORE_SERVICES.map((s, i) => (
-              <motion.div key={s.title} className="about-service-card" variants={staggerItem}
-                whileHover={{ y: -6, boxShadow: '0 20px 56px rgba(0,0,0,.1)' }}>
-                <div className="about-service-emoji">{s.emoji}</div>
-                <h4 className="about-service-title">{s.title}</h4>
-                <p className="about-service-desc">{s.desc}</p>
+            {CORE_SERVICES.map((s, i) => {
+              const isOpen = openCard === i
+              return (
+                <motion.div
+                  key={s.title}
+                  className={`about-service-card${isOpen ? ' is-open' : ''}`}
+                  variants={staggerItem}
+                  whileHover={{ y: -6 }}
+                >
+                  <div className="about-service-emoji">{s.emoji}</div>
+                  <h4 className="about-service-title">{s.title}</h4>
+                  <p className="about-service-desc">{s.desc}</p>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.p
+                        className="about-service-more"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {s.more}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+
+                  <button
+                    className="about-service-toggle"
+                    onClick={() => setOpenCard(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                  >
+                    {isOpen ? 'Show Less' : 'Learn More'}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                      style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform .25s' }}>
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </button>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── We Stand Out Because Of (cards) ── */}
+      <section className="about-standout section-pad" style={{ background: 'var(--light)' }}>
+        <div className="container">
+          <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+            <div className="section-tag">Why Choose OWS</div>
+            <h2 className="section-title">What Makes Us Different</h2>
+            <p className="section-subtitle">
+              The qualities that make Odisha Workforce Solutions a partner you can rely on.
+            </p>
+          </motion.div>
+          <motion.div className="about-standout-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
+            {STANDOUT.map((p) => (
+              <motion.div key={p.text} className="about-standout-card" variants={staggerItem} whileHover={{ y: -5 }}>
+                <span className="about-standout-icon">{p.icon}</span>
+                <span className="about-standout-text">{p.text}</span>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ── Why Choose Us ── */}
-      <section className="about-why section-pad" style={{ background: 'var(--light)' }}>
-        <div className="container">
-          <div className="about-why-grid">
-            <motion.div className="about-why-left" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={VP}>
-              <div className="section-tag">Why Choose Us</div>
-              <h2 className="section-title">We Stand Out<br />Because Of</h2>
-              <p className="about-para">
-                At Odisha Workforce Solutions, we believe that people are the foundation of every
-                successful organization. Our experienced team works closely with clients and candidates
-                to deliver customized and effective solutions.
-              </p>
-              <motion.div className="about-why-points" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-                {WHY_POINTS.map((p) => (
-                  <motion.div key={p.text} className="about-why-point" variants={staggerItem}>
-                    <span className="about-why-check">✓</span>
-                    <span>{p.text}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-
-            <motion.div className="about-why-right" variants={fadeRight} initial="hidden" whileInView="visible" viewport={VP}>
-              <div className="about-why-visual">
-                <div className="about-why-bg-card">
-                  <div className="about-why-pattern" />
-                  <div className="about-why-stat-row">
-                    <div className="about-why-big-stat">
-                      <div className="about-why-stat-num">5000+</div>
-                      <div className="about-why-stat-label">Candidates Placed</div>
-                    </div>
-                    <div className="about-why-big-stat">
-                      <div className="about-why-stat-num">300+</div>
-                      <div className="about-why-stat-label">Employer Partners</div>
-                    </div>
-                  </div>
-                  <div className="about-why-quote">
-                    "Through innovation, integrity, and dedication, we continue to build long-term
-                    relationships and create meaningful impact in the workforce ecosystem."
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Our Commitment ── */}
+      {/* ── Our Commitment (cards) ── */}
       <section className="about-commitment section-pad">
         <div className="container">
           <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
             <div className="section-tag">Our Commitment</div>
-            <h2 className="section-title">We Are Here to Help</h2>
+            <h2 className="section-title">We Are Committed to Helping</h2>
             <p className="section-subtitle">
-              Through innovation, integrity, and dedication, we create meaningful impact for all our stakeholders.
+              Through innovation, integrity, and dedication, we build long-term relationships and create
+              meaningful impact across the workforce ecosystem.
             </p>
           </motion.div>
           <motion.div className="about-commitment-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-            {COMMITMENTS.map((c, i) => (
+            {COMMITMENTS.map((c) => (
               <motion.div key={c.title} className="about-commitment-card" variants={staggerItem} whileHover={{ y: -6 }}>
                 <div className="about-commitment-emoji">{c.emoji}</div>
                 <h4 className="about-commitment-title">{c.title}</h4>
@@ -301,11 +398,11 @@ export default function AboutUs({ onNavigate }) {
                 proudly serves clients across multiple industries and regions.
               </p>
               <p className="about-para">
-                Whether you are looking for career opportunities, workforce solutions, or educational
-                guidance, we are here to support your journey every step of the way.
+                Whether you are looking for career opportunities, workforce solutions, recruitment services,
+                or educational guidance, our team is ready to support your journey every step of the way.
               </p>
               <div className="about-reach-tags">
-                {['Bhubaneswar', 'Cuttack', 'Rourkela', 'Pan-India', 'Canada', 'Australia', 'UK', 'Gulf'].map((r) => (
+                {['Bhubaneswar', 'Odisha', 'Pan-India', 'Abroad'].map((r) => (
                   <span key={r} className="about-reach-tag">{r}</span>
                 ))}
               </div>
@@ -333,10 +430,11 @@ export default function AboutUs({ onNavigate }) {
         <div className="container">
           <motion.div className="about-cta-inner" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             <motion.h2 className="about-cta-title" variants={fadeUp}>
-              Ready to Transform Your Career<br />or Find the Right Talent?
+              Empowering Careers. Strengthening Businesses.<br />Creating Opportunities. 🚀
             </motion.h2>
             <motion.p className="about-cta-sub" variants={fadeUp}>
-              Join thousands of job seekers and employers who trust Odisha Workforce Solutions.
+              Connect with Odisha Workforce Solutions for career opportunities, workforce solutions, and
+              educational guidance — across India and abroad.
             </motion.p>
             <motion.div className="about-cta-actions" variants={fadeUp}>
               <motion.button className="btn btn-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}

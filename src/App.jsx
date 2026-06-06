@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useInView as useFramerInView } from 'framer-motion'
 import owsLogo from './assets/logo.png'
+import owsBadge from './assets/logo-badge.png'
 import AboutUs from './AboutUs'
 import OurServices from './OurServices'
 import Industries from './Industries'
@@ -1124,7 +1125,9 @@ function Footer() {
         <div className="footer-top">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src={owsLogo} alt="OWS" className="footer-logo-img" />
+              <span className="footer-logo-chip">
+                <img src={owsBadge} alt="OWS" className="footer-logo-img" />
+              </span>
               <div>
                 <span className="footer-logo-main">Odisha Workforce Solutions</span>
                 <span className="footer-logo-sub">ISO 9001:2015 · MSME · GST</span>

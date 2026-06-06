@@ -1,43 +1,115 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
-const fadeLeft = { hidden: { opacity: 0, x: -44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
-const fadeRight = { hidden: { opacity: 0, x: 44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }
-const staggerItem = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }
+const staggerItem = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }
 const VP = { once: true, margin: '-80px' }
 
-const SEEKERS = [
-  { emoji: '🎯', title: 'Career Counselling & Placement', desc: 'One-on-one guidance with industry experts to map your ideal career path and connect you with the right opportunities.', tag: 'Career' },
-  { emoji: '📈', title: 'Skill Development & Training', desc: 'Industry-oriented training programs designed to make you job-ready with practical, market-relevant skills.', tag: 'Training' },
-  { emoji: '🎓', title: 'Education Consultancy', desc: 'Expert guidance for higher education admissions in India and abroad — from college selection to visa support.', tag: 'Education' },
-  { emoji: '📝', title: 'Resume & Interview Prep', desc: 'Professional resume writing, LinkedIn optimisation, and mock interview coaching to help you stand out.', tag: 'Coaching' },
-  { emoji: '💼', title: 'Job Matching & Referrals', desc: 'AI-assisted job matching to pair your skills and aspirations with the most suitable open positions.', tag: 'Placement' },
-  { emoji: '🌐', title: 'Study Abroad Guidance', desc: 'End-to-end overseas education support — university selection, SOP writing, and visa processing.', tag: 'International' },
-]
-
-const EMPLOYERS = [
-  { emoji: '👥', title: 'Recruitment & Staffing Solutions', desc: 'End-to-end permanent and contract hiring across industries — from sourcing and screening to onboarding.', tag: 'Recruitment' },
-  { emoji: '🏢', title: 'HR Consulting & Workforce Planning', desc: 'Strategic HR solutions and workforce planning to align your talent strategy with business growth goals.', tag: 'HR Strategy' },
-  { emoji: '🏫', title: 'Campus Recruitment Drives', desc: 'Organized campus drives at top colleges to connect you with bright, job-ready fresh graduates.', tag: 'Campus' },
-  { emoji: '🎪', title: 'Mega Job Fairs & Bulk Hiring', desc: 'Large-scale job fairs and bulk hiring events for companies looking to scale teams quickly.', tag: 'Bulk Hiring' },
-  { emoji: '📊', title: 'Payroll & Compliance Support', desc: 'Complete payroll management, PF, ESI, and statutory compliance handling for your workforce.', tag: 'Compliance' },
-  { emoji: '⚙️', title: 'Contractual Staffing', desc: 'Flexible contract and temporary staffing solutions to meet seasonal or project-based workforce demands.', tag: 'Contractual' },
-]
-
-const PROCESS = [
-  { n: '01', emoji: '🔍', title: 'Requirement Analysis', desc: 'Deep dive into your goals, skills, and expectations to understand exactly what you need.' },
-  { n: '02', emoji: '🎯', title: 'Profile Building', desc: 'Craft your professional profile, resume, and pitch to maximize your market appeal.' },
-  { n: '03', emoji: '🔗', title: 'Matching & Shortlisting', desc: 'Leveraging our network to match you with the best opportunities or candidates.' },
-  { n: '04', emoji: '📋', title: 'Interview Coordination', desc: 'End-to-end scheduling and preparation support for every interview round.' },
-  { n: '05', emoji: '✅', title: 'Offer & Onboarding', desc: 'Salary negotiation, offer evaluation, and seamless onboarding support.' },
+const SERVICES = [
+  {
+    icon: '👥',
+    title: 'Recruitment & Staffing Solutions',
+    desc: 'We help organizations identify, recruit, and retain qualified professionals across various industries.',
+    items: [
+      'Permanent Hiring',
+      'Temporary & Contract Staffing',
+      'Bulk Hiring Solutions',
+      'Executive Search',
+      'Entry-Level & Experienced Recruitment',
+      'Industry-Specific Talent Acquisition',
+    ],
+  },
+  {
+    icon: '🏢',
+    title: 'HR Consulting & Workforce Planning',
+    desc: 'Our HR solutions are designed to improve organizational efficiency and workforce management.',
+    items: [
+      'Workforce Planning',
+      'HR Policy Guidance',
+      'Employee Management Support',
+      'Talent Mapping',
+      'Recruitment Process Support',
+      'Organizational HR Solutions',
+    ],
+  },
+  {
+    icon: '🎓',
+    title: 'Campus Recruitment Drives',
+    desc: 'We organize and manage campus hiring programs that connect educational institutions with leading employers.',
+    items: [
+      'On-Campus Recruitment Drives',
+      'Pre-Placement Training',
+      'Employer Coordination',
+      'Candidate Screening & Shortlisting',
+      'Placement Assistance',
+    ],
+  },
+  {
+    icon: '🎪',
+    title: 'Mega Job Fairs & Hiring Events',
+    desc: 'We conduct large-scale job fairs and recruitment events to create employment opportunities for job seekers and hiring solutions for employers.',
+    items: [
+      'Multi-Company Hiring Events',
+      'Walk-In Interviews',
+      'Candidate Registration & Support',
+      'Employer Participation Management',
+      'Bulk Recruitment Coordination',
+    ],
+  },
+  {
+    icon: '📈',
+    title: 'Skill Development & Training Programs',
+    desc: 'We provide industry-oriented training programs that enhance employability and professional growth.',
+    items: [
+      'Soft Skills Development',
+      'Communication Skills',
+      'Interview Preparation',
+      'Personality Development',
+      'Industry-Specific Training',
+      'Career Readiness Programs',
+    ],
+  },
+  {
+    icon: '🧭',
+    title: 'Career Counselling & Placement Support',
+    desc: 'We guide students and job seekers toward suitable career opportunities and professional success.',
+    items: [
+      'Career Guidance',
+      'Job Search Assistance',
+      'Resume Building',
+      'Interview Preparation',
+      'Placement Support',
+      'Career Planning',
+    ],
+  },
+  {
+    icon: '✈️',
+    title: 'Education Consultancy (India & Abroad)',
+    desc: 'We assist students in selecting the right educational pathways both in India and internationally.',
+    items: [
+      'Admission Guidance',
+      'Course & University Selection',
+      'Study Abroad Assistance',
+      'Documentation Support',
+      'Career-Oriented Education Planning',
+      'Student Counselling',
+    ],
+  },
+  {
+    icon: '📝',
+    title: 'Resume Building & Interview Preparation',
+    desc: 'Our experts help candidates present themselves professionally and confidently in the job market.',
+    items: [
+      'Professional Resume Creation',
+      'CV Optimization',
+      'Mock Interviews',
+      'Communication Improvement',
+      'Interview Techniques & Guidance',
+    ],
+  },
 ]
 
 export default function OurServices({ onNavigate }) {
-  const [tab, setTab] = useState('seekers')
-  const cards = tab === 'seekers' ? SEEKERS : EMPLOYERS
-
   return (
     <div className="page-wrap">
       {/* Hero */}
@@ -55,15 +127,16 @@ export default function OurServices({ onNavigate }) {
             </motion.div>
             <motion.div className="hero-badge" variants={fadeUp} style={{ marginBottom: 20 }}>
               <span className="badge-dot" />
-              Tailored · Professional · Result-Driven
+              Professional · Result-Oriented
             </motion.div>
             <motion.h1 className="page-hero-title" variants={fadeUp}>
-              Comprehensive Solutions<br />
-              <span className="h1-gradient">Tailored to Your Needs</span>
+              Comprehensive Workforce<br />
+              <span className="h1-gradient">& Career Solutions</span>
             </motion.h1>
             <motion.p className="page-hero-sub" variants={fadeUp}>
-              Whether you're a job seeker, student, or employer — OWS delivers end-to-end workforce
-              and education solutions designed around your specific goals.
+              At Odisha Workforce Solutions (OWS), we provide professional and result-oriented services
+              designed to support job seekers, students, employers, and institutions — bridging the gap
+              between talent and opportunity through innovative workforce and education solutions.
             </motion.p>
             <motion.div className="page-hero-actions" variants={fadeUp}>
               <motion.a href="tel:+919090117678" className="btn btn-primary" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
@@ -79,68 +152,37 @@ export default function OurServices({ onNavigate }) {
         </div>
       </section>
 
-      {/* Stats bar */}
-      <div className="page-stats-strip">
-        <div className="container">
-          <div className="page-stats-row">
-            {[['5000+','Candidates Placed'],['300+','Employer Partners'],['95%','Client Retention'],['8+','Years of Service']].map(([v,l]) => (
-              <div key={l} className="page-strip-stat">
-                <span className="page-strip-val">{v}</span>
-                <span className="page-strip-lbl">{l}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Services tabs */}
+      {/* Services */}
       <section className="section-pad">
         <div className="container">
           <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
             <div className="section-tag">Our Services</div>
             <h2 className="section-title">What We Offer</h2>
-            <p className="section-subtitle">Choose your profile to see services designed specifically for you.</p>
+            <p className="section-subtitle">
+              A complete suite of workforce and education services, delivered with professionalism and care.
+            </p>
           </motion.div>
-          <motion.div className="page-tabs" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-            <button className={`page-tab${tab === 'seekers' ? ' active' : ''}`} onClick={() => setTab('seekers')}>
-              👤 For Job Seekers & Students
-            </button>
-            <button className={`page-tab${tab === 'employers' ? ' active' : ''}`} onClick={() => setTab('employers')}>
-              🏢 For Employers & Organisations
-            </button>
-          </motion.div>
-          <motion.div className="page-services-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP} key={tab}>
-            {cards.map((s) => (
-              <motion.div key={s.title} className="page-service-card" variants={staggerItem} whileHover={{ y: -6, boxShadow: '0 20px 56px rgba(0,0,0,.1)' }}>
-                <div className="psc-emoji">{s.emoji}</div>
-                <span className="psc-tag">{s.tag}</span>
-                <h3 className="psc-title">{s.title}</h3>
-                <p className="psc-desc">{s.desc}</p>
-                <div className="psc-arrow">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Process */}
-      <section className="section-pad" style={{ background: 'var(--light)' }}>
-        <div className="container">
-          <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-            <div className="section-tag">How It Works</div>
-            <h2 className="section-title">Our 5-Step Process</h2>
-            <p className="section-subtitle">A transparent, structured approach that delivers results — every time.</p>
-          </motion.div>
-          <motion.div className="page-process-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
-            {PROCESS.map((p, i) => (
-              <motion.div key={p.n} className="page-process-card" variants={staggerItem}>
-                <div className="ppc-number">{p.n}</div>
-                <div className="ppc-emoji">{p.emoji}</div>
-                <h4 className="ppc-title">{p.title}</h4>
-                <p className="ppc-desc">{p.desc}</p>
-                {i < PROCESS.length - 1 && <div className="ppc-connector" />}
+          <motion.div className="svc-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
+            {SERVICES.map((s, i) => (
+              <motion.div key={s.title} className="svc-card" variants={staggerItem} whileHover={{ y: -6 }}>
+                <div className="svc-card-head">
+                  <span className="svc-icon">{s.icon}</span>
+                  <span className="svc-num">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h3 className="svc-title">{s.title}</h3>
+                <p className="svc-desc">{s.desc}</p>
+                <div className="svc-divider" />
+                <ul className="svc-list">
+                  {s.items.map((it) => (
+                    <li key={it} className="svc-list-item">
+                      <svg className="svc-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </motion.div>

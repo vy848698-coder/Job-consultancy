@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useInView as useFramerInView } from 'framer-motion'
-import owsLogo from './assets/logo.png'
+import owsLogo from './assets/t.png'
 import owsBadge from './assets/logo-badge.png'
 import AboutUs from './AboutUs'
 import OurServices from './OurServices'
@@ -1140,8 +1140,20 @@ function Footer() {
               <span>📍 Satya Vihar, Bhubaneswar – 751017</span>
             </div>
             <div className="footer-socials">
-              {[['in', 'LinkedIn'], ['YT', 'YouTube'], ['fb', 'Facebook'], ['𝕏', 'Twitter']].map(([l, t]) => (
-                <motion.button key={l} className="social-btn" title={t} whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }}>{l}</motion.button>
+              {SOCIALS.map((s) => (
+                <motion.a
+                  key={s.name}
+                  className="social-btn"
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={s.name}
+                  style={{ '--sc': s.grad || s.color }}
+                  whileHover={{ scale: 1.12, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {s.icon}
+                </motion.a>
               ))}
             </div>
           </div>
@@ -1161,11 +1173,6 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2025 Odisha Workforce Solutions Pvt. Ltd. · ISO 9001:2015 Certified</span>
-          <div className="footer-bottom-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Sitemap</a>
-          </div>
         </div>
       </div>
     </footer>
@@ -1175,6 +1182,66 @@ function Footer() {
 /* ══════════════════════════════════════════
    THEME SWITCHER
 ══════════════════════════════════════════ */
+const SOCIALS = [
+  {
+    name: 'Facebook', href: 'https://facebook.com', color: '#1877F2',
+    icon: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 21.5v-8.01H5.6V9.5h3.6V7.49c0-3.57 1.73-5.24 4.7-5.24 1.42 0 2.18.1 2.54.15v3.5h-2.04c-1.26 0-1.7.66-1.7 2v1.6h3.7l-.5 3.99H12.7V21.5H9.2Z"/></svg>,
+  },
+  {
+    name: 'Instagram', href: 'https://instagram.com', color: '#E4405F',
+    grad: 'linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%)',
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg>,
+  },
+  {
+    name: 'LinkedIn', href: 'https://linkedin.com', color: '#0A66C2',
+    icon: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>,
+  },
+  {
+    name: 'Twitter', href: 'https://twitter.com', color: '#1DA1F2',
+    icon: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.92a8.2 8.2 0 0 1-2.36.65 4.1 4.1 0 0 0 1.8-2.27 8.2 8.2 0 0 1-2.6 1 4.1 4.1 0 0 0-7 3.74A11.64 11.64 0 0 1 3.39 4.6a4.1 4.1 0 0 0 1.27 5.47A4.07 4.07 0 0 1 2.8 9.6v.05a4.1 4.1 0 0 0 3.29 4.02 4.1 4.1 0 0 1-1.85.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 2 18.28a11.6 11.6 0 0 0 6.29 1.84c7.55 0 11.67-6.25 11.67-11.67l-.01-.53A8.3 8.3 0 0 0 22 5.92Z"/></svg>,
+  },
+]
+
+function SocialRail() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div
+      className={`social-rail${open ? ' open' : ''}`}
+      aria-label="Social media links"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className="social-rail-list">
+        {SOCIALS.map((s, i) => (
+          <a
+            key={s.name}
+            className="social-rail-link"
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={s.name}
+            tabIndex={open ? 0 : -1}
+            style={{ '--sc': s.grad || s.color, '--d': `${i * 0.045}s` }}
+          >
+            {s.icon}
+          </a>
+        ))}
+      </div>
+      <button
+        className="social-rail-toggle"
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Follow us on social media"
+        aria-expanded={open}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>
+        </svg>
+      </button>
+    </div>
+  )
+}
+
 function ThemeSwitcher() {
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState(
@@ -1369,7 +1436,6 @@ export default function App() {
             <StudyAbroad />
             <WhyChoose onNavigate={navigate} />
             <Testimonials />
-            <FranchiseSection />
             <CTA />
           </motion.div>
         )}
@@ -1405,6 +1471,7 @@ export default function App() {
         )}
       </AnimatePresence>
       <Footer />
+      <SocialRail />
       <ThemeSwitcher />
     </>
   )

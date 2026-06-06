@@ -34,9 +34,17 @@ export default function Gallery({ onNavigate }) {
               <span className="page-breadcrumb-sep">›</span>
               <span>Gallery</span>
             </motion.div>
+            <motion.div className="hero-badge" variants={fadeUp} style={{ marginBottom: 20 }}>
+              <span className="badge-dot" />
+              Moments · Events · Drives
+            </motion.div>
             <motion.h1 className="page-hero-title" variants={fadeUp}>
               Our <span className="h1-gradient">Gallery</span>
             </motion.h1>
+            <motion.p className="page-hero-sub" variants={fadeUp}>
+              A glimpse into our journey — job fairs, campus recruitment drives, training sessions,
+              and the people, partnerships, and milestones behind Odisha Workforce Solutions.
+            </motion.p>
           </motion.div>
         </div>
       </section>
@@ -44,6 +52,13 @@ export default function Gallery({ onNavigate }) {
       {/* Image grid */}
       <section className="section-pad">
         <div className="container">
+          <motion.div className="section-header centered" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+            <div className="section-tag">Gallery</div>
+            <h2 className="section-title">Captured Moments</h2>
+            <p className="section-subtitle">
+              Snapshots from our recruitment drives, events, and everyday work empowering people across Odisha and beyond.
+            </p>
+          </motion.div>
           <motion.div className="gphoto-grid" variants={stagger} initial="hidden" whileInView="visible" viewport={VP}>
             {IMAGES.map((src, i) => (
               <motion.button

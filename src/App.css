@@ -1637,7 +1637,7 @@ body.theme-dark .theme-circle { border-color: rgba(255,255,255,.12) !important; 
 /* ══════════════════════════════════════════
    ABOUT US PAGE
 ══════════════════════════════════════════ */
-.section-pad { padding: 96px 0; }
+.section-pad { padding: 0px 0; }
 .nav-link-active { color: var(--primary) !important; font-weight: 700 !important; }
 
 /* About Hero */

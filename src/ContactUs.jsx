@@ -69,10 +69,11 @@ export default function ContactUs({ onNavigate }) {
     setSending(true)
     setSendError('')
     try {
+      // Sent as a "simple" form POST (application/x-www-form-urlencoded) so the
+      // browser never fires a CORS preflight — more reliable on shared hosting.
       const res = await fetch('send.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: new URLSearchParams({
           name: form.name,
           phone: form.phone,
           email: form.email,

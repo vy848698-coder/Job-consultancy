@@ -6,6 +6,15 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+/* Answer CORS preflight (in case a www↔non-www redirect makes the request cross-origin) */
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
 
 /* ───────── Config ───────── */
 const SMTP_HOST      = 'smtp.hostinger.com';
@@ -15,6 +24,7 @@ const SMTP_PASS      = 'iC7v@6Wp';
 const MAIL_FROM      = 'no-reply@odishaworkforce.com';
 const MAIL_FROM_NAME = 'OWS Website';
 const MAIL_TO        = 'vk3630932@gmail.com';
+const MAIL_COPY      = 'no-reply@odishaworkforce.com';  // same-domain copy (always lands in Hostinger webmail)
 
 /* ───────── Only allow POST ───────── */
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
@@ -66,7 +76,9 @@ $body =
     '</div>';
 
 /* ───────── Minimal SMTP client over SSL ───────── */
-function smtp_send($from, $fromName, $to, $replyTo, $subject, $htmlBody) {
+function smtp_send($from, $fromName, $recipients, $replyTo, $subject, $htmlBody) {
+    $recipients = array_values(array_unique(array_filter((array) $recipients)));
+    $primaryTo  = $recipients[0] ?? '';
     $fp = @stream_socket_client('ssl://' . SMTP_HOST . ':' . SMTP_PORT, $errno, $errstr, 20);
     if (!$fp) return "connect: $errstr ($errno)";
     stream_set_timeout($fp, 20);
@@ -88,11 +100,13 @@ function smtp_send($from, $fromName, $to, $replyTo, $subject, $htmlBody) {
     $send(base64_encode(SMTP_USER));   $r = $read(); if (!$ok($r, 334)) return "user: $r";
     $send(base64_encode(SMTP_PASS));   $r = $read(); if (!$ok($r, 235)) return "pass: auth failed";
     $send('MAIL FROM:<' . $from . '>'); $r = $read(); if (!$ok($r, 250)) return "mailfrom: $r";
-    $send('RCPT TO:<' . $to . '>');     $r = $read(); if (!$ok($r, 250)) return "rcptto: $r";
+    foreach ($recipients as $rcpt) {
+        $send('RCPT TO:<' . $rcpt . '>'); $r = $read(); if (!$ok($r, 250)) return "rcptto ($rcpt): $r";
+    }
     $send('DATA');                      $r = $read(); if (!$ok($r, 354)) return "data: $r";
 
     $headers  = 'From: ' . $fromName . ' <' . $from . ">\r\n";
-    $headers .= 'To: <' . $to . ">\r\n";
+    $headers .= 'To: <' . $primaryTo . ">\r\n";
     $headers .= 'Reply-To: <' . $replyTo . ">\r\n";
     $headers .= 'Subject: ' . $subject . "\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
@@ -109,7 +123,7 @@ function smtp_send($from, $fromName, $to, $replyTo, $subject, $htmlBody) {
     return true;
 }
 
-$result = smtp_send(MAIL_FROM, MAIL_FROM_NAME, MAIL_TO, $email, $subjectLine, $body);
+$result = smtp_send(MAIL_FROM, MAIL_FROM_NAME, [MAIL_TO, MAIL_COPY], $email, $subjectLine, $body);
 
 if ($result === true) {
     echo json_encode(['success' => true, 'message' => 'Sent']);

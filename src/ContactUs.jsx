@@ -42,6 +42,8 @@ export default function ContactUs({ onNavigate }) {
   const [submitted, setSubmitted] = useState(false)
   const [payTab, setPayTab] = useState('bank')
   const [copied, setCopied] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState('')
 
   function validate() {
     const e = {}
@@ -58,11 +60,42 @@ export default function ContactUs({ onNavigate }) {
     return e
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const e2 = validate()
     setErrors(e2)
-    if (Object.keys(e2).length === 0) setSubmitted(true)
+    if (Object.keys(e2).length !== 0) return
+
+    setSending(true)
+    setSendError('')
+    try {
+      const res = await fetch('send.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      })
+      const text = await res.text()
+      let data = {}
+      try { data = JSON.parse(text) } catch { /* not JSON */ }
+      if (res.ok && data.success) {
+        setSubmitted(true)
+      } else if (data.message) {
+        setSendError(data.message)
+      } else {
+        // Surface the real status so we can diagnose (404 = file missing, 500 = PHP error, etc.)
+        setSendError(`Send failed (HTTP ${res.status}). Please try again or WhatsApp us.`)
+      }
+    } catch (err) {
+      setSendError('Network error: ' + (err?.message || 'request blocked') + '. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   function handleChange(k, v) {
@@ -236,10 +269,11 @@ export default function ContactUs({ onNavigate }) {
                         <span>I agree to be contacted by Odisha Workforce Solutions regarding my enquiry. *</span>
                       </label>
                       {errors.consent && <span className="field-error" style={{ marginTop: -8 }}>{errors.consent}</span>}
-                      <motion.button type="submit" className="btn btn-primary contact-submit"
-                        whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.97 }}>
-                        Submit Application
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      {sendError && <span className="field-error" style={{ marginTop: -4 }}>{sendError}</span>}
+                      <motion.button type="submit" className="btn btn-primary contact-submit" disabled={sending}
+                        whileHover={sending ? undefined : { scale: 1.02, y: -2 }} whileTap={sending ? undefined : { scale: 0.97 }}>
+                        {sending ? 'Sending…' : 'Submit Application'}
+                        {!sending && <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}
                       </motion.button>
                     </motion.form>
                   )}

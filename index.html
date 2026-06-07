@@ -15,6 +15,34 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      /* Apply theme before first paint: Emerald Green by default, Dark Mode if the browser prefers dark. */
+      (function () {
+        try {
+          var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var emerald = {
+            '--primary': '#10B981', '--primary-dark': '#059669', '--primary-mid': '#34D399',
+            '--accent': '#34D399', '--accent2': '#0891B2',
+            '--dark': '#064E3B', '--dark2': '#065F46', '--mid': '#047857',
+            '--gray': '#5A6A88', '--gray2': '#8895A7', '--gray3': '#CBD5E1',
+            '--light': '#ECFDF5', '--light2': '#D1FAE5', '--white': '#FFFFFF', '--border': '#A7F3D0'
+          };
+          var night = {
+            '--primary': '#22D3EE', '--primary-dark': '#06B6D4', '--primary-mid': '#67E8F9',
+            '--accent': '#06B6D4', '--accent2': '#8B5CF6',
+            '--dark': '#F8FAFC', '--dark2': '#E2E8F0', '--mid': '#CBD5E1',
+            '--gray': '#94A3B8', '--gray2': '#64748B', '--gray3': '#475569',
+            '--light': '#111827', '--light2': '#1E293B', '--white': '#0F172A', '--border': '#1E293B'
+          };
+          var vars = dark ? night : emerald;
+          var root = document.documentElement;
+          for (var k in vars) root.style.setProperty(k, vars[k]);
+          root.style.setProperty('--font-display', "'Sora', sans-serif");
+          root.style.setProperty('--font-body', "'Inter', sans-serif");
+          if (dark) document.body.classList.add('theme-dark');
+        } catch (e) {}
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

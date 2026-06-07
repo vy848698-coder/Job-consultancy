@@ -448,13 +448,24 @@ export default function AboutUs({ onNavigate }) {
               <div className="about-contact-card">
                 <div className="about-contact-icon"><Phone size={26} strokeWidth={2} /></div>
                 <div className="about-contact-label">Call Us Anytime</div>
+                <a href="tel:+919090117679" className="about-contact-number">+91 9090117679</a>
                 <a href="tel:+919090117678" className="about-contact-number">+91 9090117678</a>
                 <p className="about-contact-sub">Mon–Sat · 9 AM to 7 PM IST</p>
-                <motion.a href="tel:+919090117678" className="btn btn-primary about-contact-btn"
-                  whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-                  Contact Us Now
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </motion.a>
+                <div className="about-contact-actions">
+                  <motion.a href="tel:+919090117679" className="btn btn-primary about-contact-btn"
+                    whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+                    Call Now
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </motion.a>
+                  <motion.a href="https://wa.me/919090117679" target="_blank" rel="noopener noreferrer"
+                    className="btn about-whatsapp-btn"
+                    whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+                    <svg width="17" height="17" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+                      <path d="M16.04 3.2c-7.1 0-12.86 5.76-12.86 12.86 0 2.27.6 4.49 1.73 6.45L3.1 28.8l6.46-1.69a12.8 12.8 0 0 0 6.48 1.76h.01c7.1 0 12.86-5.76 12.86-12.86 0-3.44-1.34-6.67-3.77-9.1a12.78 12.78 0 0 0-9.1-3.71zm0 23.5h-.01a10.66 10.66 0 0 1-5.43-1.49l-.39-.23-4.03 1.06 1.08-3.93-.25-.4a10.63 10.63 0 0 1-1.63-5.65c0-5.9 4.8-10.7 10.7-10.7 2.86 0 5.54 1.11 7.56 3.13a10.63 10.63 0 0 1 3.13 7.57c0 5.9-4.8 10.7-10.7 10.7zm5.87-8.01c-.32-.16-1.9-.94-2.2-1.04-.3-.11-.51-.16-.73.16-.21.32-.83 1.04-1.02 1.26-.19.21-.38.24-.7.08-.32-.16-1.36-.5-2.59-1.6-.96-.85-1.6-1.91-1.79-2.23-.19-.32-.02-.5.14-.66.14-.14.32-.38.48-.56.16-.19.21-.32.32-.54.11-.21.05-.4-.03-.56-.08-.16-.73-1.76-1-2.41-.26-.63-.53-.54-.73-.55l-.62-.01c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69 0 1.59 1.16 3.12 1.32 3.34.16.21 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.25 1.48.21 2.03.13.62-.09 1.9-.78 2.17-1.53.27-.75.27-1.39.19-1.53-.08-.13-.29-.21-.61-.37z"/>
+                    </svg>
+                    WhatsApp
+                  </motion.a>
+                </div>
               </div>
             </motion.div>
           </div>

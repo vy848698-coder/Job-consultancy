@@ -1135,14 +1135,21 @@ body.theme-dark .lead-note strong { color: #F8FAFC; }
    CTA
 ══════════════════════════════════════════ */
 .cta-section {
-  padding: 100px 0;
-  background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary) 32%, var(--accent) 64%, var(--accent2) 100%);
-  position: relative; overflow: hidden;
+  padding: 80px 0 100px;
+  background: var(--light);
 }
-.cta-blob { position: absolute; border-radius: 50%; pointer-events: none; }
-.cta-blob-1 { width: 600px; height: 600px; background: rgba(255,255,255,.04); top: -200px; left: -150px; }
-.cta-blob-2 { width: 400px; height: 400px; background: rgba(20,184,166,.08); bottom: -100px; right: -100px; }
-.cta-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; }
+.cta-blob { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+.cta-blob-1 { width: 600px; height: 600px; background: rgba(255,255,255,.06); top: -240px; left: -160px; }
+.cta-blob-2 { width: 400px; height: 400px; background: rgba(255,255,255,.08); bottom: -160px; right: -120px; }
+.cta-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary) 32%, var(--accent) 64%, var(--accent2) 100%);
+  border-radius: var(--radius-xl);
+  padding: 56px;
+  box-shadow: 0 44px 84px -44px color-mix(in srgb, var(--primary) 70%, transparent);
+}
+.cta-content, .cta-contact-card { position: relative; z-index: 1; }
 .cta-content h2 { font-size: clamp(1.8rem, 3.2vw, 2.8rem); color: #fff; margin-bottom: 18px; line-height: 1.2; }
 .cta-content p { font-size: 1rem; color: rgba(255,255,255,.78); line-height: 1.75; margin-bottom: 36px; max-width: 440px; }
 .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -1159,13 +1166,16 @@ body.theme-dark .lead-note strong { color: #F8FAFC; }
 }
 .cta-contact-row:last-child { margin-bottom: 0; }
 .cta-ci { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-@media (max-width: 860px) { .cta-inner { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .cta-inner { grid-template-columns: 1fr; padding: 40px 26px; gap: 36px; } }
 
 
 /* ══════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════ */
 .footer { background: var(--dark); color: rgba(255,255,255,.55); padding: 80px 0 36px; }
+/* Dark theme flips --dark to a light color, so pin the footer to a fixed dark shade
+   to keep its white text readable. */
+body.theme-dark .footer { background: #0A0F1C; }
 .footer-top {
   display: grid;
   grid-template-columns: 1.3fr 2fr;
@@ -1248,14 +1258,13 @@ body.theme-dark .lead-note strong { color: #F8FAFC; }
 
 /* Floating action button */
 /* Floating social launcher (left-center) */
-/* Floating WhatsApp button — right center */
+/* Floating WhatsApp button — bottom right */
 .whatsapp-fab {
   position: fixed;
-  right: 22px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 32px;
+  bottom: 32px;
   z-index: 985;
-  width: 58px; height: 58px;
+  width: 56px; height: 56px;
   border-radius: 50%;
   background: #25D366;
   color: #fff;
@@ -1274,7 +1283,7 @@ body.theme-dark .lead-note strong { color: #F8FAFC; }
   100% { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
 }
 @media (max-width: 600px) {
-  .whatsapp-fab { width: 52px; height: 52px; right: 14px; }
+  .whatsapp-fab { width: 52px; height: 52px; right: 18px; bottom: 20px; }
 }
 
 .social-rail {
@@ -1666,7 +1675,7 @@ body.theme-dark .theme-circle { border-color: rgba(255,255,255,.12) !important; 
 /* ══════════════════════════════════════════
    ABOUT US PAGE
 ══════════════════════════════════════════ */
-.section-pad { padding: 0px 0; }
+.section-pad { padding: 96px 0; }
 .nav-link-active { color: var(--primary) !important; font-weight: 700 !important; }
 
 /* About Hero */
@@ -2167,18 +2176,25 @@ body.theme-dark .about-solution-chip { background: #1E293B !important; border-co
 }
 .about-contact-number {
   display: block;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 900;
   color: var(--primary);
   text-decoration: none;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   transition: color 0.18s;
 }
 .about-contact-number:hover { color: var(--primary-dark); }
 .about-contact-sub {
   font-size: 0.82rem;
   color: var(--gray2);
+  margin-top: 10px;
   margin-bottom: 28px;
+}
+.about-contact-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .about-contact-btn {
   display: inline-flex;
@@ -2186,22 +2202,39 @@ body.theme-dark .about-solution-chip { background: #1E293B !important; border-co
   gap: 8px;
   text-decoration: none;
 }
+.about-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 24px -8px rgba(37,211,102,.6);
+}
+.about-whatsapp-btn:hover { background: #1ebe5b; }
 
-/* CTA Banner */
+/* CTA Banner — contained rounded card */
 .about-cta-banner {
   position: relative;
-  padding: 96px 0;
-  overflow: hidden;
-  background: var(--primary);
+  padding: 80px 0 100px;
+  background: var(--light);
 }
-.about-cta-bg {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.07) 1px, transparent 0);
+.about-cta-bg { display: none; }
+.about-cta-inner {
+  position: relative; overflow: hidden;
+  text-align: center;
+  background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary) 32%, var(--accent) 64%, var(--accent2) 100%);
+  border-radius: var(--radius-xl);
+  padding: 72px 48px;
+  box-shadow: 0 44px 84px -44px color-mix(in srgb, var(--primary) 70%, transparent);
+}
+.about-cta-inner::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 0);
   background-size: 44px 44px;
-  pointer-events: none;
 }
-.about-cta-inner { text-align: center; position: relative; }
+.about-cta-inner > * { position: relative; z-index: 1; }
 .about-cta-title {
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 900;
@@ -2216,6 +2249,7 @@ body.theme-dark .about-solution-chip { background: #1E293B !important; border-co
   margin-bottom: 36px;
 }
 .about-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 600px) { .about-cta-inner { padding: 48px 24px; } }
 .btn-white {
   background: #fff;
   color: var(--primary);

@@ -1161,10 +1161,10 @@ function FranchiseSection() {
 function CTA() {
   return (
     <section className="cta-section">
-      <div className="cta-blob cta-blob-1" />
-      <div className="cta-blob cta-blob-2" />
       <div className="container">
         <motion.div className="cta-inner" variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
+          <div className="cta-blob cta-blob-1" />
+          <div className="cta-blob cta-blob-2" />
           <div className="cta-content">
             <h2>Ready to Build Your Dream<br />Workforce?</h2>
             <p>Let's discuss how OWS can help you find, hire, and retain the best talent — or empower your career journey.</p>
@@ -1514,6 +1514,20 @@ const PAGE_TRANSITION = {
 export default function App() {
   const [page, setPage] = useState('home')
 
+  // Auto theme: Emerald Green by default, Dark Mode if the browser/OS prefers dark.
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const applyPreferred = () => {
+      const id = mq.matches ? 'dark-mode' : 'emerald-green'
+      const theme = THEMES.find((t) => t.id === id) || THEMES[0]
+      applyThemeVars(theme)
+    }
+    applyPreferred()
+    applyFont(FONTS[0])
+    mq.addEventListener?.('change', applyPreferred)
+    return () => mq.removeEventListener?.('change', applyPreferred)
+  }, [])
+
   function navigate(key) {
     setPage(key)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -1569,7 +1583,6 @@ export default function App() {
       <Footer />
       <WhatsAppFab />
       <SocialRail />
-      <ThemeSwitcher />
     </>
   )
 }

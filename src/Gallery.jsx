@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }
+const fadeRight = { hidden: { opacity: 0, x: 44 }, visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } } }
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } }
 const staggerItem = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }
 const VP = { once: true, margin: '-60px' }
@@ -27,8 +28,9 @@ export default function Gallery({ onNavigate }) {
         <div className="page-hero-orb page-hero-orb-1" />
         <div className="page-hero-orb page-hero-orb-2" />
         <div className="container">
-          <motion.div className="page-hero-inner" initial="hidden" animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          <div className="page-hero-inner with-visual">
+            <motion.div className="page-hero-content" initial="hidden" animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
             <motion.div className="page-breadcrumb" variants={fadeUp}>
               <button className="page-breadcrumb-link" onClick={() => onNavigate('home')}>Home</button>
               <span className="page-breadcrumb-sep">›</span>
@@ -45,7 +47,23 @@ export default function Gallery({ onNavigate }) {
               A glimpse into our journey — job fairs, campus recruitment drives, training sessions,
               and the people, partnerships, and milestones behind Odisha Workforce Solutions.
             </motion.p>
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="page-hero-visual" initial="hidden" animate="visible" variants={fadeRight}>
+              <div className="gallery-hero-wall">
+                <div className="ghw-col ghw-col-up">
+                  {[...IMAGES.slice(0, 6), ...IMAGES.slice(0, 6)].map((src, i) => (
+                    <div key={i} className="ghw-photo"><img src={src} alt="" /></div>
+                  ))}
+                </div>
+                <div className="ghw-col ghw-col-down">
+                  {[...IMAGES.slice(6), ...IMAGES.slice(6)].map((src, i) => (
+                    <div key={i} className="ghw-photo"><img src={src} alt="" /></div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

@@ -307,9 +307,9 @@ export default function ContactUs({ onNavigate }) {
                       svg: <MessageCircle size={18} strokeWidth={2} /> },
                     { name: 'LinkedIn', href: 'https://linkedin.com', color: '#0A66C2',
                       svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg> },
-                    { name: 'Facebook', href: 'https://facebook.com', color: '#1877F2',
+                    { name: 'Facebook', href: 'https://www.facebook.com/share/19VYATs714/?mibextid=wwXIfr', color: '#1877F2',
                       svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 21.5v-8.01H5.6V9.5h3.6V7.49c0-3.57 1.73-5.24 4.7-5.24 1.42 0 2.18.1 2.54.15v3.5h-2.04c-1.26 0-1.7.66-1.7 2v1.6h3.7l-.5 3.99H12.7V21.5H9.2Z"/></svg> },
-                    { name: 'Instagram', href: 'https://instagram.com', color: '#E4405F',
+                    { name: 'Instagram', href: 'https://www.instagram.com/odisha.workforce?igsh=ZnA4azZtemFzamtm', color: '#E4405F',
                       svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg> },
                   ].map((s) => (
                     <a key={s.name} href={s.href} className="contact-social-btn" style={{ '--sc': s.color }}

@@ -1261,11 +1261,11 @@ function Footer() {
 ══════════════════════════════════════════ */
 const SOCIALS = [
   {
-    name: 'Facebook', href: 'https://facebook.com', color: '#1877F2',
+    name: 'Facebook', href: 'https://www.facebook.com/share/19VYATs714/?mibextid=wwXIfr', color: '#1877F2',
     icon: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 21.5v-8.01H5.6V9.5h3.6V7.49c0-3.57 1.73-5.24 4.7-5.24 1.42 0 2.18.1 2.54.15v3.5h-2.04c-1.26 0-1.7.66-1.7 2v1.6h3.7l-.5 3.99H12.7V21.5H9.2Z"/></svg>,
   },
   {
-    name: 'Instagram', href: 'https://instagram.com', color: '#E4405F',
+    name: 'Instagram', href: 'https://www.instagram.com/odisha.workforce?igsh=ZnA4azZtemFzamtm', color: '#E4405F',
     grad: 'linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%)',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg>,
   },

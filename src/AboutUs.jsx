@@ -291,7 +291,7 @@ export default function AboutUs({ onNavigate }) {
                   <div className="about-logo-tagline">Empowering People. Enabling Progress.</div>
                   <div className="about-logo-location">
                     <MapPin size={14} strokeWidth={2} />
-                    Bhubaneswar, Odisha, India
+                    Satya Vihar, BBSR – 751017
                   </div>
                 </div>
                 <div className="about-card-decoration" />

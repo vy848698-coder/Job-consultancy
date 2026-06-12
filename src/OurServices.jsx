@@ -251,8 +251,8 @@ export default function OurServices({ onNavigate }) {
             <motion.h2 className="about-cta-title" variants={fadeUp}>Ready to Get Started?</motion.h2>
             <motion.p className="about-cta-sub" variants={fadeUp}>Talk to our team today and find the perfect solution for your needs.</motion.p>
             <motion.div className="about-cta-actions" variants={fadeUp}>
-              <motion.a href="tel:+919090117678" className="btn btn-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-                Call +91 9090117678
+              <motion.a href="tel:+919090117679" className="btn btn-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+                Call +91 9090117679 / +91 9090117678
               </motion.a>
               <motion.button className="btn btn-outline-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('contact')}>
                 Send an Enquiry

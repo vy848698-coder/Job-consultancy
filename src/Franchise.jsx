@@ -239,8 +239,8 @@ export default function Franchise({ onNavigate }) {
             <motion.div className="about-cta-actions" variants={fadeUp}>
               <motion.button className="btn btn-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
                 onClick={() => onNavigate('contact')}>Apply for Franchise Now</motion.button>
-              <motion.a href="tel:+919090117678" className="btn btn-outline-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-                Call +91 9090117678
+              <motion.a href="tel:+919090117679" className="btn btn-outline-white" whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+                Call +91 9090117679 / +91 9090117678
               </motion.a>
             </motion.div>
           </motion.div>

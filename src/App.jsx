@@ -1176,8 +1176,8 @@ function CTA() {
           <div className="cta-contact-card">
             <h4>Contact Odisha Workforce Solutions</h4>
             {[
-              { Icon: MapPin, text: 'Plot No-10, Baidyanathapur, Near Hiteech Square, Satya Vihar, BBSR – 751017' },
-              { Icon: Phone, text: '+91 9090117679 (OP) · +91 9090117678 (Calling)' },
+              { Icon: MapPin, text: 'Plot No - 10, Baikunthapuri, Near Hi-Tech Square, Satya Vihar, BBSR – 751017' },
+              { Icon: Phone, text: '+91 9090117679 / +91 9090117678' },
               { Icon: Mail, text: 'info@odishaworkforce.com' },
               { Icon: Globe, text: 'odishaworkforce.com' },
             ].map((c) => (
@@ -1212,9 +1212,9 @@ function Footer() {
             </div>
             <p>An ISO 9001:2015 certified, MSME-registered organisation empowering people and enabling progress across India and internationally.</p>
             <div className="footer-contact-list">
-              <a href="tel:+919090117679">📞 +91 9090117679 / 9090117678</a>
+              <a href="tel:+919090117679">📞 +91 9090117679 / +91 9090117678</a>
               <a href="mailto:info@odishaworkforce.com">✉️ info@odishaworkforce.com</a>
-              <span>📍 Satya Vihar, Bhubaneswar – 751017</span>
+              <span>📍 Plot No - 10, Baikunthapuri, Near Hi-Tech Square, Satya Vihar, BBSR – 751017</span>
             </div>
             <div className="footer-socials">
               {SOCIALS.map((s) => (

@@ -15,7 +15,7 @@ const VP = { once: true, margin: '-80px' }
 
 const INFO_CARDS = [
   { Icon: Phone, title: 'Call Us', lines: ['+91 9090117678'], sub: 'Mon–Sat · 9 AM to 7 PM IST', href: 'tel:+919090117678', color: '#2563EB', bg: '#EFF6FF' },
-  { Icon: Mail, title: 'Email Us', lines: ['info@owsodisha.com'], sub: 'We reply within 24 hours', href: 'mailto:info@owsodisha.com', color: '#059669', bg: '#F0FDF4' },
+  { Icon: Mail, title: 'Email Us', lines: ['info@odishaworkforce.com'], sub: 'We reply within 24 hours', href: 'mailto:info@odishaworkforce.com', color: '#059669', bg: '#F0FDF4' },
   { Icon: MapPin, title: 'Visit Us', lines: ['Bhubaneswar, Odisha', 'India – 751001'], sub: 'Walk-in appointments welcome', href: null, color: '#D97706', bg: '#FFFBEB' },
   { Icon: Clock, title: 'Office Hours', lines: ['Mon – Sat: 9 AM – 7 PM', 'Sunday: Closed'], sub: 'Holidays may vary', href: null, color: '#7C3AED', bg: '#F5F3FF' },
 ]
@@ -164,7 +164,7 @@ export default function ContactUs({ onNavigate }) {
                 </div>
                 {[
                   { Icon: Phone, label: '+91 9090117678', color: '#2563EB' },
-                  { Icon: Mail, label: 'info@owsodisha.com', color: '#059669' },
+                  { Icon: Mail, label: 'info@odishaworkforce.com', color: '#059669' },
                   { Icon: MessageCircle, label: 'Chat on WhatsApp', color: '#25D366' },
                   { Icon: MapPin, label: 'Bhubaneswar, Odisha', color: '#D97706' },
                 ].map((a) => (

@@ -16,7 +16,7 @@ const VP = { once: true, margin: '-80px' }
 const INFO_CARDS = [
   { Icon: Phone, title: 'Call Us', lines: ['+91 9090117678'], sub: 'Mon–Sat · 9 AM to 7 PM IST', href: 'tel:+919090117678', color: '#2563EB', bg: '#EFF6FF' },
   { Icon: Mail, title: 'Email Us', lines: ['info@odishaworkforce.com'], sub: 'We reply within 24 hours', href: 'mailto:info@odishaworkforce.com', color: '#059669', bg: '#F0FDF4' },
-  { Icon: MapPin, title: 'Visit Us', lines: ['Bhubaneswar, Odisha', 'India – 751001'], sub: 'Walk-in appointments welcome', href: null, color: '#D97706', bg: '#FFFBEB' },
+  { Icon: MapPin, title: 'Visit Us', lines: ['Bhubaneswar, Odisha', 'India – 751017'], sub: 'Walk-in appointments welcome', href: null, color: '#D97706', bg: '#FFFBEB' },
   { Icon: Clock, title: 'Office Hours', lines: ['Mon – Sat: 9 AM – 7 PM', 'Sunday: Closed'], sub: 'Holidays may vary', href: null, color: '#7C3AED', bg: '#F5F3FF' },
 ]
 
@@ -289,7 +289,7 @@ export default function ContactUs({ onNavigate }) {
                   <span className="contact-side-icon"><MapPin size={20} strokeWidth={2} /></span>
                   <h3 className="contact-side-title">Our Office</h3>
                 </div>
-                <p className="contact-side-addr">Odisha Workforce Solutions<br />Bhubaneswar, Odisha<br />India – 751001</p>
+                <p className="contact-side-addr">Odisha Workforce Solutions<br />Bhubaneswar, Odisha<br />India – 751017</p>
                 <a href="https://maps.google.com/?q=Bhubaneswar+Odisha" target="_blank" rel="noreferrer" className="contact-map-placeholder contact-map-clickable">
                   <div className="contact-map-inner">
                     <span className="contact-map-pin"><MapPin size={28} strokeWidth={2} /></span>
